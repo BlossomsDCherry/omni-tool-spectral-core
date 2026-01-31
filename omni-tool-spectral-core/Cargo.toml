@@ -1,0 +1,14 @@
+[package]
+name = "omni-tool"
+version = "0.1.0-atomic-drop"
+edition = "2021"
+authors = ["Antigravity", "Pecos D. Willy"]
+description = "Spectral Masses & Harmonic Entrainment: unified framework for Yang–Mills, Riemann, Birch–Swinnerton-Dyer, P vs NP"
+license = "Apache-2.0"
+repository = "https://github.com/pecosdwilly/omni-tool-spectral-core"
+
+[dependencies]
+# To be added as needed
+
+[dev-dependencies]
+# To be added as needed
