@@ -23,4 +23,5 @@ of intelligence equity and access
 within, between, and across 
 institutional cells.  In short,
 intelligence communication has a very slow,
-chaotic flow.
+chaotic flow within these niche human 
+ecological zones.
