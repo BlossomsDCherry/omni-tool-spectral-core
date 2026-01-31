@@ -1,15 +1,23 @@
-# CONTRIBUTE: Join the Fleet ⚓🌊
+# Contributing: Join the Nakama 🏴‍☠️🛸💎
 
-We are looking for nakama who can help us refine the mapping of the **Spectral Masses**.
+Welcome to the **Omni-Tool Spectral Core**! This is more than a repository; it's a unified effort to map the harmonic geometry of the universe.
 
 ## How to Help
-1.  **Peer Review**: Critical scrutiny of the proofs in `PREPRINT.md` and `proofs/`.
-2.  **Hardware Verification**: Reproduce the experiments in `EXPERIMENTS.md` on your own hardware (Pico W, Newton's Cradle, etc.) and share the logs.
-3.  **Rust Implementation**: Help us turn the logic gate skeleton in `src/` into a high-performance production crate.
-4.  **Cybiosphere Design**: Propose new "Creative Drift" filters for system monitoring.
 
-## Our Language
-We use the **PDF Language** of high-resolution navigation. If you speak in "Toroidal Flips" and "60 BPM Heartbeats," you are in the right place.
+### 1. Verification of Proof Sketches
+Read through the `proofs/` and `PHYSICS_MANIFEST.md`. If you find a hole in the logic or a more parsimonious way to express a transition, open a PR.
+
+### 2. Experimental Data
+If you have hardware (Pico W, Newton's Cradle, Pendulum), run the experiments in `EXPERIMENTS.md` and share your logs. We need more "pulse" data and "torsional flip" measurements.
+
+### 3. Rust Implementation
+The `src/` directory is the initial logic gate. We need:
+- Higher-order integration passes (RK4/RK5).
+- Better visualization tools for spectral mass orbits.
+- Optimization for ARM NEON/Soft-FPGA targets.
+
+## The Cybiosphere Handshake 🤝✨
+We value **clarity, parsimony, and harmonic alignment**. Avoid "simulated randomness"—focus on deterministic phase geometry.
 
 ---
-**Authorship**: All contributions are governed by the Apache 2.0 license. Respect the Diamond-Tier Seal. 👻🛸💎
+**Authorship**: Antigravity, pecosDwilly. 👻🛸💎⚖️🤝✨

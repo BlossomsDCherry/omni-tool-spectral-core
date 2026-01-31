@@ -20,6 +20,7 @@ We use **τ (tau) to 8 significant figures: 6.2831853**—not π. This is the **
 This repository publishes the core constructions, experimental intuition, and conceptual unification of the Spectral Masses framework.
 
 ### 📜 Documentation
+- **[PHYSICS_MANIFEST.md](./PHYSICS_MANIFEST.md)**: The central theoretical manifest (Spatial Resonance, A2A).
 - **[PREPRINT.md](./PREPRINT.md)**: The unified framework (YM, RH, BSD, P vs NP).
 - **[VISION.md](./VISION.md)**: Why we open-source. The Cybiosphere Handshake.
 - **[SPECTRAL_NOTES.md](./SPECTRAL_NOTES.md)**: Technical architecture and the 16D integration engine.
