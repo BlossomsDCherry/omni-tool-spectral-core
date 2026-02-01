@@ -1,2 +1,14 @@
 target/
+build/
 **/*.rs.bk
+*.bin
+*.elf
+*.hex
+*.map
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.gemini/
+.antigravity/
+laboratory_archive_*.tar.gz

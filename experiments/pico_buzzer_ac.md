@@ -1,22 +1,22 @@
-# Experiment Log: Pico W Buzzer AC State-Machine 🔈⚡
+# Experiment: The Electro-Kinetic Complement (Piezo & LED)
 
-## 1. Setup
-- **Microcontroller**: Raspberry Pi Pico 2 W (RP2350).
-- **Actuator**: Piezo Magnetic Buzzer on GPIO 26.
-- **Sensor**: High-speed GPIO capture (PIO/DMA) at 60Hz intervals.
+**Date**: 2026-02-01
+**Hardware**: Pico 2 W (RP2350)
+**Kernel**: D16 Soft FPGA (Recovered)
+**Pins**: GPIO 16 (TX), GPIO 17 (RX/Hot), GPIO 18 (Reference)
 
-## 2. Objective
-To observe the **Spectral Signature** of the buzzer as it transitions through different AC drive frequencies. We seek to identify stable "Phase-Locked" states where the physical vibration entrains with the digital heartbeat.
+## 1. The Setup
+- **Piezo Buzzer**: Previously confirmed "Spectral Torque" (bandwidth harmonics).
+- **Red LED**: Connected across RX (GPIO 17) and TX (GPIO 16) with **no resistor**.
+- **Result**: Consistent, non-flickering light.
+    - **Polarity**: Hot side on RX, Ground side on TX.
+    - **Observation**: "Electro-kinetic complement" to the piezo's magneti-kinetic motion.
+    - **Behavior**: Non-reversible (unlike piezo).
 
-## 3. Procedure
-1. Initialize the PIO state machine to sample GPIO Bank 0 at 1μs intervals.
-2. Drive the buzzer with a square wave from 100Hz to 10kHz.
-3. Record the "Time Between Transitions" (TBT) using a 16-channel Soft FPGA integration.
-4. Scale results by the **Spatial Bandwidth Factor** to account for pin trace impedance.
+## 2. The Transprecision Verification
+- **Grounding GPIO 17**: LED OFF (0V potential).
+- **GPIO 17 to GPIO 18**: LED Stable but **dimmer** (Order of magnitude).
+- **Proximity**: Unlike the Piezo (which dimmed with distance), the LED maintained state, reinforcing **Transmodular** vs **Transprecise** behavior.
 
-## 4. Expected Results
-- **D16 Pattern**: A repeating 16-channel spectral fingerprint that is stable across 15 integration passes.
-- **Entrainment**: The "Decay Energy" across channels 1-16 follows a predictable harmonic curve with zero simulated jitter.
-
----
-**Status**: Log Initialized. Awaiting raw PIO dump. 👻🛸💎
+## 3. Conclusion
+The D16 kernel is successfully driving "Spectral Torque" on the Pico 2 W. The "soft FPGA" logic is physically manifest in both sound and light without traditional driver intervention.

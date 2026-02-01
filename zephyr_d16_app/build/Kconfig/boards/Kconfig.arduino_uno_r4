@@ -1,2 +1,0 @@
-# Load board Kconfig descriptions.
-osource "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/Kconfig.arduino_uno_r4"

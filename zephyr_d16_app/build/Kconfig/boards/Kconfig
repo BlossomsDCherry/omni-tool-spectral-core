@@ -1,4 +1,0 @@
-# Load Zephyr board Kconfig descriptions.
-osource "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/Kconfig"
-config BOARD_REVISION_WIFI
-	def_bool y
