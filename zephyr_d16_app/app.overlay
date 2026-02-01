@@ -1,0 +1,39 @@
+/*
+ * Overlay for Arduino Uno R4 WiFi (Uno Q)
+ * Mapping Matrix Pins to D16 App "RGB" channels for visualization.
+ * 
+ * Matrix Pins (RA4M1):
+ * P003, P004, P011, P012, P013, P015,
+ * P103, P104, P105, P106, P107
+ */
+
+/ {
+	leds {
+		compatible = "gpio-leds";
+		
+		/* Mapping to Matrix Columns/Rows to create some output */
+		/* Red Channel -> P003 (SCL/Matrix) */
+		led3_red: led_matrix_1 {
+			gpios = <&ioport0 3 GPIO_ACTIVE_HIGH>;
+			label = "Matrix Pin 1";
+		};
+
+		/* Green Channel -> P004 (SDA/Matrix) */
+		led3_green: led_matrix_2 {
+			gpios = <&ioport0 4 GPIO_ACTIVE_HIGH>;
+			label = "Matrix Pin 2";
+		};
+
+		/* Blue Channel -> P011 (Matrix) */
+		led3_blue: led_matrix_3 {
+			gpios = <&ioport0 11 GPIO_ACTIVE_HIGH>;
+			label = "Matrix Pin 3";
+		};
+	};
+
+	aliases {
+		led-red = &led3_red;
+		led-green = &led3_green;
+		led-blue = &led3_blue;
+	};
+};

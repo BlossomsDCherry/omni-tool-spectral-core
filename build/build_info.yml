@@ -1,0 +1,4 @@
+west:
+  command: /home/pecosdwilly/.local/bin/west build -p -b rpi_pico2/rp2350a/m33/w zephyr_harmonic_net
+  topdir: /home/pecosdwilly/zephyrproject
+  version: 1.5.0

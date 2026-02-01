@@ -1,0 +1,19 @@
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+    - name: hubble
+      url-base: https://github.com/HubbleNetwork
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: main
+      import: true
+    - name: hubblenetwork-sdk
+      remote: hubble
+      revision: main
+      path: modules/lib/hubblenetwork-sdk
+
+  self:
+    path: zephyr_harmonic_net

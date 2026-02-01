@@ -1,0 +1,58 @@
+# Copyright (c) 2024 Hubble Network, Inc.
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is the application Kconfig entry point. All application Kconfig
+# options can be defined here or included via other application Kconfig files.
+# You can browse these options using the west targets menuconfig (terminal) or
+# guiconfig (GUI).
+
+menu "Hubble Network Beacon Sample options"
+
+
+config HUBBLE_BEACON_SAMPLE_ADDITIONAL_ADV
+    bool "Enable additional adv in Beacon Sample"
+    help
+	Enable additional advertisement in the Beacon Sample
+
+if HUBBLE_BEACON_SAMPLE_ADDITIONAL_ADV
+
+config HUBBLE_BEACON_SAMPLE_ADDITIONAL_ADV_UUID
+    hex "Additional adv uuid"
+    default 0xefbe
+    help
+	UUID to be advertised
+
+config HUBBLE_BEACON_SAMPLE_ADDITIONAL_ADV_DATA
+    hex "Additional adv data"
+    default 0xefbeadde
+    help
+	Data to be advertised
+endif
+
+config HUBBLE_BEACON_SAMPLE_USE_CTS
+    bool "Use CTS to sync UTC time"
+    default n
+    select BT_CTS
+    select BT_CTS_HELPER_API
+    help
+       Use CTS to sync time instead of hardcode during building.
+
+config HUBBLE_BEACON_SAMPLE_UPDATE_ADV_PERIOD
+    int "Period to update the advertisment packet"
+    default 360
+    help
+	Period (in seconds) to generate a new advertisement message.
+
+endmenu
+
+# Hidden option
+config HUBBLE_BEACON_SAMPLE_STORE_NONCE_SEQUENCE
+     bool
+     default y if NVS
+     select HUBBLE_NETWORK_SEQUENCE_NONCE_CUSTOM
+
+source "Kconfig.zephyr"
+
+module = APP
+module-str = APP
+source "subsys/logging/Kconfig.template.log_config"

@@ -1,0 +1,1381 @@
+# 0 "/home/pecosdwilly/zephyrproject/zephyr/misc/empty_file.c"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4.dts" 1
+
+
+
+
+
+
+/dts-v1/;
+
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/r7fa4m1ab3cfm.dtsi" 1 3 4
+
+
+
+
+
+
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/clock/ra_clock.h" 1 3 4
+# 8 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/r7fa4m1ab3cfm.dtsi" 2 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/r7fa4m1ax.dtsi" 1 3 4
+
+
+
+
+
+
+
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/ra4-cm4-common.dtsi" 1 3 4
+
+
+
+
+
+
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/dts/common/mem.h" 1 3 4
+# 8 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/ra4-cm4-common.dtsi" 2 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/armv7-m.dtsi" 1 3 4
+
+
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/dts/common/skeleton.dtsi" 1 3 4
+# 9 "/home/pecosdwilly/zephyrproject/zephyr/dts/common/skeleton.dtsi" 3 4
+/ {
+ #address-cells = <1>;
+ #size-cells = <1>;
+
+ chosen {};
+
+ aliases {};
+};
+# 4 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/armv7-m.dtsi" 2 3 4
+
+/ {
+ soc {
+  #address-cells = <1>;
+  #size-cells = <1>;
+  compatible = "simple-bus";
+  interrupt-parent = <&nvic>;
+  ranges;
+
+  nvic: interrupt-controller@e000e100 {
+   #address-cells = <1>;
+   compatible = "arm,v7m-nvic";
+   reg = <0xe000e100 0xc00>;
+   interrupt-controller;
+   #interrupt-cells = <2>;
+  };
+
+  systick: timer@e000e010 {
+   compatible = "arm,armv7m-systick";
+   reg = <0xe000e010 0x10>;
+  };
+ };
+};
+# 9 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/ra4-cm4-common.dtsi" 2 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/pinctrl/renesas/pinctrl-ra.h" 1 3 4
+# 10 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/ra4-cm4-common.dtsi" 2 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/pwm/ra_pwm.h" 1 3 4
+# 11 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/ra4-cm4-common.dtsi" 2 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/dts/common/freq.h" 1 3 4
+# 12 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/ra4-cm4-common.dtsi" 2 3 4
+
+/ {
+ cpus {
+  #address-cells = <1>;
+  #size-cells = <0>;
+
+  cpu@0 {
+   device_type = "cpu";
+   compatible = "arm,cortex-m4";
+   reg = <0>;
+   #address-cells = <1>;
+   #size-cells = <1>;
+
+   mpu: mpu@e000ed90 {
+    compatible = "arm,armv7m-mpu";
+    reg = <0xe000ed90 0x40>;
+   };
+  };
+ };
+
+ soc {
+  system: system@4001e000 {
+   compatible = "renesas,ra-system";
+   reg = <0x4001e000 0x1000>;
+   status = "okay";
+  };
+
+  elc: elc@40041000 {
+   compatible = "renesas,ra-elc";
+   reg = <0x40041000 0x70>;
+   #renesas-elc-cells = <2>;
+   clocks = <&pclkb 2 14>;
+   status = "disabled";
+  };
+
+  flash: flash-controller@407e0000 {
+   compatible = "renesas,ra-flash-lp-controller";
+   reg = <0x407e0000 0x10000>;
+   #address-cells = <1>;
+   #size-cells = <1>;
+   interrupts = <23 1>;
+   interrupt-names = "frdyi";
+  };
+
+  ioport0: gpio@40040000 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x40040000 0x20>;
+   port = <0>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   status = "disabled";
+  };
+
+  ioport1: gpio@40040020 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x40040020 0x20>;
+   port = <1>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   status = "disabled";
+  };
+
+  ioport2: gpio@40040040 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x40040040 0x20>;
+   port = <2>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   status = "disabled";
+  };
+
+  ioport3: gpio@40040060 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x40040060 0x20>;
+   port = <3>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   status = "disabled";
+  };
+
+  ioport4: gpio@40040080 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x40040080 0x20>;
+   port = <4>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   vbatts-pins = <2 3 4>;
+   status = "disabled";
+  };
+
+  ioport5: gpio@400400a0 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x400400a0 0x20>;
+   port = <5>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   status = "disabled";
+  };
+
+  ioport9: gpio@40040120 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x40040120 0x20>;
+   port = <9>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   status = "disabled";
+  };
+
+  dma0: dma@40005000 {
+   compatible = "renesas,ra-dma";
+   reg = <0x40005000 0x100>, <0x40005200 0xa0>;
+   reg-names = "channel", "common";
+   clocks = <&iclk 0 22>;
+   dma-channels = <4>;
+   #dma-cells = <2>;
+   status = "disabled";
+  };
+
+  pinctrl: pin-controller@40040800 {
+   compatible = "renesas,ra-pinctrl-pfs";
+   reg = <0x40040800 0x3c0>;
+   status = "okay";
+  };
+
+  sci0: sci0@40070000 {
+   compatible = "renesas,ra-sci";
+   interrupts = <0 1>, <1 1>, <2 1>, <3 1>;
+   interrupt-names = "rxi", "txi", "tei", "eri";
+   reg = <0x40070000 0x20>;
+   clocks = <&pclka 1 31>;
+   status = "disabled";
+
+   uart {
+    compatible = "renesas,ra-sci-uart";
+    channel = <0>;
+    status = "disabled";
+   };
+
+   i2c {
+    compatible = "renesas,ra-i2c-sci";
+    #address-cells = <1>;
+    #size-cells = <0>;
+    channel = <0>;
+    status = "disabled";
+   };
+  };
+
+  sci1: sci1@40070020 {
+   compatible = "renesas,ra-sci";
+   interrupts = <4 1>, <5 1>, <6 1>, <7 1>;
+   interrupt-names = "rxi", "txi", "tei", "eri";
+   reg = <0x40070020 0x20>;
+   clocks = <&pclka 1 30>;
+   status = "disabled";
+
+   uart {
+    compatible = "renesas,ra-sci-uart";
+    channel = <1>;
+    status = "disabled";
+   };
+
+   i2c {
+    compatible = "renesas,ra-i2c-sci";
+    #address-cells = <1>;
+    #size-cells = <0>;
+    channel = <1>;
+    status = "disabled";
+   };
+  };
+
+  sci9: sci9@40070120 {
+   compatible = "renesas,ra-sci";
+   reg = <0x40070120 0x20>;
+   clocks = <&pclka 1 22>;
+   status = "disabled";
+
+   uart {
+    compatible = "renesas,ra-sci-uart";
+    channel = <9>;
+    status = "disabled";
+   };
+
+   i2c {
+    compatible = "renesas,ra-i2c-sci";
+    #address-cells = <1>;
+    #size-cells = <0>;
+    channel = <9>;
+    status = "disabled";
+   };
+  };
+
+  spi0: spi@40072000 {
+   compatible = "renesas,ra-spi";
+   #address-cells = <1>;
+   #size-cells = <0>;
+   channel = <0>;
+   reg = <0x40072000 0x100>;
+   status = "disabled";
+  };
+
+  spi1: spi@40072100 {
+   compatible = "renesas,ra-spi";
+   #address-cells = <1>;
+   #size-cells = <0>;
+   channel = <1>;
+   interrupts = <28 1>, <29 1>, <30 1>, <31 1>;
+   interrupt-names = "rxi", "txi", "tei", "eri";
+   reg = <0x40072100 0x100>;
+   status = "disabled";
+  };
+
+  agt0: agt@40084000 {
+   compatible = "renesas,ra-agt";
+   channel = <0>;
+   reg = <0x40084000 0x100>;
+   renesas,count-source = "AGT_CLOCK_LOCO";
+   renesas,prescaler = <0>;
+   renesas,resolution = <16>;
+   status = "disabled";
+
+   counter {
+    compatible = "renesas,ra-agt-counter";
+    status = "disabled";
+   };
+  };
+
+  agt1: agt@40084100 {
+   compatible = "renesas,ra-agt";
+   channel = <1>;
+   reg = <0x40084100 0x100>;
+   renesas,count-source = "AGT_CLOCK_LOCO";
+   renesas,prescaler = <0>;
+   renesas,resolution = <16>;
+   status = "disabled";
+
+   counter {
+    compatible = "renesas,ra-agt-counter";
+    status = "disabled";
+   };
+  };
+
+  adc0: adc@4005c000 {
+   compatible = "renesas,ra-adc";
+   interrupt-names = "scanend";
+   reg = <0x4005c000 0x100>;
+   #io-channel-cells = <1>;
+   vref-mv = <3300>;
+   status = "disabled";
+  };
+
+  dac_global: dac_global@4005e000 {
+   compatible = "renesas,ra-dac-global";
+   reg = <0x4005e000 0x10c4>;
+   #address-cells = <1>;
+   #size-cells = <0>;
+   status = "okay";
+
+   dac0: dac@0 {
+    compatible = "renesas,ra-dac";
+    #io-channel-cells = <1>;
+    reg = <0>;
+    status = "disabled";
+   };
+  };
+
+  crc: crc@40074000 {
+   compatible = "renesas,ra-crc";
+   reg = <0x40074000 0x1000>;
+   clocks = <&pclka 2 1>;
+   status = "disabled";
+  };
+
+  iic0: iic0@40053000 {
+   compatible = "renesas,ra-iic";
+   channel = <0>;
+   reg = <0x40053000 0x100>;
+   status = "disabled";
+  };
+
+  iic1: iic1@40053100 {
+   compatible = "renesas,ra-iic";
+   channel = <1>;
+   reg = <0x40053100 0x100>;
+   status = "disabled";
+  };
+
+  usbfs: usbfs@40090000 {
+   compatible = "renesas,ra-usbfs";
+   reg = <0x40090000 0x2000>;
+   num-bidir-endpoints = <10>;
+   interrupts = <12 1>, <13 1>;
+   interrupt-names = "usbfs-i", "usbfs-r";
+   phys = <&usbfs_phy>;
+   phys-clock = <&uclk>;
+   status = "disabled";
+
+   udc {
+    compatible = "renesas,ra-udc";
+    status = "disabled";
+   };
+  };
+
+  port_irq0: external-interrupt@40006000 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006000 0x1>;
+   channel = <0>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq1: external-interrupt@40006001 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006001 0x1>;
+   channel = <1>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq2: external-interrupt@40006002 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006002 0x1>;
+   channel = <2>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq3: external-interrupt@40006003 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006003 0x1>;
+   channel = <3>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq4: external-interrupt@40006004 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006004 0x1>;
+   channel = <4>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq6: external-interrupt@40006006 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006006 0x1>;
+   channel = <6>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq7: external-interrupt@40006007 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006007 0x1>;
+   channel = <7>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq9: external-interrupt@40006009 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006009 0x1>;
+   channel = <9>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq11: external-interrupt@4000600b {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x4000600b 0x1>;
+   channel = <11>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq14: external-interrupt@4000600e {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x4000600e 0x1>;
+   channel = <14>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq15: external-interrupt@4000600f {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x4000600f 0x1>;
+   channel = <15>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  pwm0: pwm0@40078000 {
+   compatible = "renesas,ra-pwm";
+   divider = <0>;
+   channel = <0>;
+   clocks = <&pclkd 3 5>;
+   reg = <0x40078000 0x100>;
+   #pwm-cells = <3>;
+   status = "disabled";
+  };
+
+  pwm1: pwm1@40078100 {
+   compatible = "renesas,ra-pwm";
+   divider = <0>;
+   channel = <1>;
+   clocks = <&pclkd 3 5>;
+   reg = <0x40078100 0x100>;
+   #pwm-cells = <3>;
+   status = "disabled";
+  };
+
+  pwm2: pwm2@40078200 {
+   compatible = "renesas,ra-pwm";
+   divider = <0>;
+   channel = <2>;
+   reg = <0x40078200 0x100>;
+   #pwm-cells = <3>;
+   status = "disabled";
+  };
+
+  pwm3: pwm3@40078300 {
+   compatible = "renesas,ra-pwm";
+   divider = <0>;
+   channel = <3>;
+   reg = <0x40078300 0x100>;
+   #pwm-cells = <3>;
+   status = "disabled";
+  };
+
+  pwm4: pwm4@40078400 {
+   compatible = "renesas,ra-pwm";
+   divider = <0>;
+   channel = <4>;
+   clocks = <&pclkd 3 6>;
+   reg = <0x40078400 0x100>;
+   #pwm-cells = <3>;
+   status = "disabled";
+  };
+
+  pwm5: pwm5@40078500 {
+   compatible = "renesas,ra-pwm";
+   divider = <0>;
+   channel = <5>;
+   clocks = <&pclkd 3 6>;
+   reg = <0x40078500 0x100>;
+   #pwm-cells = <3>;
+   status = "disabled";
+  };
+
+  wdt: wdt@40044200 {
+   compatible = "renesas,ra-wdt";
+   reg = <0x40044200 0x200>;
+   clocks = <&pclkb 0 0>;
+   status = "disabled";
+  };
+
+  ctsu: ctsua@40081000 {
+   compatible = "renesas,ra-ctsu";
+   reg = <0x40081000 0x24>;
+   clocks = <&pclkb 2 3>;
+   variant = "ctsua";
+   status = "disabled";
+  };
+
+  option_setting_ofs0: option-setting-ofs0@400 {
+   compatible = "renesas,ofs-memory";
+   reg = <0x00000400 0x4>;
+   status = "okay";
+  };
+
+  option_setting_ofs1: option-setting-ofs1@404 {
+   compatible = "renesas,ofs-memory";
+   reg = <0x00000404 0x4>;
+   status = "okay";
+  };
+
+  option_setting_secmpu: option-setting-secmpu@408 {
+   compatible = "renesas,ofs-memory";
+   reg = <0x00000408 0x34>;
+   status = "okay";
+  };
+
+  option_setting_osis: option-setting-osis@1010018 {
+   compatible = "zephyr,memory-region";
+   zephyr,memory-region = "OFS_OSIS_MEMORY";
+   reg = <0x01010018 0x1c>;
+   status = "okay";
+  };
+ };
+
+ usbfs_phy: usbfs-phy {
+  compatible = "usb-nop-xceiv";
+  #phy-cells = <0>;
+ };
+};
+
+&nvic {
+ arm,num-irq-priority-bits = <4>;
+};
+# 9 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/r7fa4m1ax.dtsi" 2 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/misc/renesas/ra-elc/ra4m1-elc.h" 1 3 4
+# 10 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/r7fa4m1ax.dtsi" 2 3 4
+
+/ {
+ soc {
+  sram0: memory@20000000 {
+   compatible = "mmio-sram";
+   reg = <0x20000000 ((32) * 1024)>;
+  };
+
+  ioport6: gpio@400400c0 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x400400c0 0x20>;
+   port = <6>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   status = "disabled";
+  };
+
+  ioport7: gpio@400400e0 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x400400e0 0x20>;
+   port = <7>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   status = "disabled";
+  };
+
+  ioport8: gpio@40040100 {
+   compatible = "renesas,ra-gpio-ioport";
+   reg = <0x40040100 0x20>;
+   port = <8>;
+   gpio-controller;
+   #gpio-cells = <2>;
+   ngpios = <16>;
+   status = "disabled";
+  };
+
+  sci2: sci2@40070040 {
+   compatible = "renesas,ra-sci";
+   reg = <0x40070040 0x20>;
+   interrupts = <8 1>, <9 1>, <10 1>, <11 1>;
+   interrupt-names = "rxi", "txi", "tei", "eri";
+   clocks = <&pclka 1 29>;
+   status = "disabled";
+
+   uart {
+    compatible = "renesas,ra-sci-uart";
+    channel = <2>;
+    status = "disabled";
+   };
+
+   i2c {
+    compatible = "renesas,ra-i2c-sci";
+    #address-cells = <1>;
+    #size-cells = <0>;
+    channel = <2>;
+    status = "disabled";
+   };
+  };
+
+  adc@4005c000 {
+   interrupts = <20 1>;
+   channel-available-mask = <0x3ff7fff>;
+  };
+
+  port_irq5: external-interrupt@40006005 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006005 0x1>;
+   channel = <5>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq8: external-interrupt@40006008 {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x40006008 0x1>;
+   channel = <8>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq10: external-interrupt@4000600a {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x4000600a 0x1>;
+   channel = <10>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  port_irq12: external-interrupt@4000600c {
+   compatible = "renesas,ra-external-interrupt";
+   reg = <0x4000600c 0x1>;
+   channel = <12>;
+   renesas,sample-clock-div = <64>;
+   #port-irq-cells = <0>;
+   status = "disabled";
+  };
+
+  trng: trng {
+   compatible = "renesas,ra-sce5-rng";
+   status = "disabled";
+  };
+
+  pwm6: pwm6@40078600 {
+   compatible = "renesas,ra-pwm";
+   divider = <0>;
+   channel = <6>;
+   clocks = <&pclkd 3 6>;
+   reg = <0x40078600 0x100>;
+   #pwm-cells = <3>;
+   status = "disabled";
+  };
+
+  pwm7: pwm7@40078700 {
+   compatible = "renesas,ra-pwm";
+   divider = <0>;
+   channel = <7>;
+   clocks = <&pclkd 3 6>;
+   reg = <0x40078700 0x100>;
+   #pwm-cells = <3>;
+   status = "disabled";
+  };
+ };
+
+ clocks: clocks {
+  #address-cells = <1>;
+  #size-cells = <1>;
+
+  xtal: clock-main-osc {
+   compatible = "renesas,ra-cgc-external-clock";
+   clock-frequency = <(((12) * 1000) * 1000)>;
+   #clock-cells = <0>;
+   status = "disabled";
+  };
+
+  hoco: clock-hoco {
+   compatible = "fixed-clock";
+   clock-frequency = <(((24) * 1000) * 1000)>;
+   #clock-cells = <0>;
+  };
+
+  moco: clock-moco {
+   compatible = "fixed-clock";
+   clock-frequency = <(((8) * 1000) * 1000)>;
+   #clock-cells = <0>;
+  };
+
+  loco: clock-loco {
+   compatible = "fixed-clock";
+   clock-frequency = <32768>;
+   #clock-cells = <0>;
+  };
+
+  subclk: clock-subclk {
+   compatible = "renesas,ra-cgc-subclk";
+   clock-frequency = <32768>;
+   #clock-cells = <0>;
+   status = "disabled";
+  };
+
+  pll: pll {
+   compatible = "renesas,ra-cgc-pll";
+   #clock-cells = <0>;
+
+   clocks = <&xtal>;
+   div = <2>;
+   mul = <8 0>;
+   status = "disabled";
+  };
+
+  pclkblock: pclkblock@40047000 {
+   compatible = "renesas,ra-cgc-pclk-block";
+   reg = <0x40047000 4>,
+         <0x40047004 4>,
+         <0x40047008 4>;
+   reg-names = "MSTPB", "MSTPC", "MSTPD";
+   #clock-cells = <0>;
+   clocks = <&pll>;
+   status = "okay";
+
+   iclk: iclk {
+    compatible = "renesas,ra-cgc-pclk";
+    clock-frequency = <48000000>;
+    div = <1>;
+    #clock-cells = <2>;
+    status = "okay";
+   };
+
+   pclka: pclka {
+    compatible = "renesas,ra-cgc-pclk";
+    div = <1>;
+    #clock-cells = <2>;
+    status = "okay";
+   };
+
+   pclkb: pclkb {
+    compatible = "renesas,ra-cgc-pclk";
+    div = <2>;
+    #clock-cells = <2>;
+    status = "okay";
+   };
+
+   pclkc: pclkc {
+    compatible = "renesas,ra-cgc-pclk";
+    div = <1>;
+    #clock-cells = <2>;
+    status = "okay";
+   };
+
+   pclkd: pclkd {
+    compatible = "renesas,ra-cgc-pclk";
+    div = <1>;
+    #clock-cells = <2>;
+    status = "okay";
+   };
+
+   fclk: fclk {
+    compatible = "renesas,ra-cgc-pclk";
+    div = <2>;
+    #clock-cells = <2>;
+    status = "okay";
+   };
+
+   clkout: clkout {
+    compatible = "renesas,ra-cgc-pclk";
+    #clock-cells = <2>;
+    status = "disabled";
+   };
+
+   uclk: uclk {
+    compatible = "renesas,ra-cgc-pclk";
+    #clock-cells = <2>;
+    status = "disabled";
+   };
+  };
+ };
+};
+
+&ioport0 {
+ port-irqs = <&port_irq2 &port_irq3 &port_irq6
+       &port_irq7 &port_irq10 &port_irq15>;
+ port-irq-names = "port-irq2",
+    "port-irq3",
+    "port-irq6",
+    "port-irq7",
+    "port-irq10",
+    "port-irq15";
+ port-irq2-pins = <2>;
+ port-irq3-pins = <4>;
+ port-irq6-pins = <0>;
+ port-irq7-pins = <1 15>;
+ port-irq10-pins = <5>;
+ port-irq15-pins = <11>;
+};
+
+&ioport1 {
+ port-irqs = <&port_irq0 &port_irq1 &port_irq2
+       &port_irq3 &port_irq4>;
+ port-irq-names = "port-irq0",
+    "port-irq1",
+    "port-irq2",
+    "port-irq3",
+    "port-irq4";
+ port-irq0-pins = <5>;
+ port-irq1-pins = <1 4>;
+ port-irq2-pins = <0>;
+ port-irq3-pins = <10>;
+ port-irq4-pins = <11>;
+};
+
+&ioport2 {
+ port-irqs = <&port_irq0 &port_irq1 &port_irq2
+       &port_irq3>;
+ port-irq-names = "port-irq0",
+    "port-irq1",
+    "port-irq2",
+    "port-irq3";
+ port-irq0-pins = <6>;
+ port-irq1-pins = <5>;
+ port-irq2-pins = <13>;
+ port-irq3-pins = <12>;
+};
+
+&ioport3 {
+ port-irqs = <&port_irq5 &port_irq6 &port_irq8
+       &port_irq9>;
+ port-irq-names = "port-irq5",
+    "port-irq6",
+    "port-irq8",
+    "port-irq9";
+ port-irq5-pins = <2>;
+ port-irq6-pins = <1>;
+ port-irq8-pins = <5>;
+ port-irq9-pins = <4>;
+};
+
+&ioport4 {
+ port-irqs = <&port_irq0 &port_irq4 &port_irq5
+       &port_irq6 &port_irq7 &port_irq8
+       &port_irq9>;
+ port-irq-names = "port-irq0",
+    "port-irq4",
+    "port-irq5",
+    "port-irq6",
+    "port-irq7",
+    "port-irq8",
+    "port-irq9";
+ port-irq0-pins = <0>;
+ port-irq4-pins = <2 11>;
+ port-irq5-pins = <1 10>;
+ port-irq6-pins = <9>;
+ port-irq7-pins = <8>;
+ port-irq8-pins = <15>;
+ port-irq9-pins = <14>;
+};
+
+&ioport5 {
+ port-irqs = <&port_irq11 &port_irq12 &port_irq14>;
+ port-irq-names = "port-irq11",
+    "port-irq12",
+    "port-irq14";
+ port-irq11-pins = <1>;
+ port-irq12-pins = <2>;
+ port-irq14-pins = <5>;
+};
+
+&pwm2 {
+ clocks = <&pclkd 3 6>;
+};
+
+&pwm3 {
+ clocks = <&pclkd 3 6>;
+};
+
+&dac_global {
+ has-davrefcr;
+};
+# 9 "/home/pecosdwilly/zephyrproject/zephyr/dts/arm/renesas/ra/ra4/r7fa4m1ab3cfm.dtsi" 2 3 4
+
+/delete-node/ &ioport5;
+/delete-node/ &ioport6;
+/delete-node/ &ioport7;
+/delete-node/ &ioport8;
+
+/ {
+ soc {
+  flash-controller@407e0000 {
+   flash-hardware-version = <3>;
+   #erase-block-cells = <2>;
+
+   flash0: flash@0 {
+    compatible = "renesas,ra-nv-code-flash";
+    reg = <0x0 ((256) * 1024)>;
+    write-block-size = <8>;
+    erase-block-size = <2048>;
+    erase-blocks = <&flash 128 2048>;
+    programming-enable;
+   };
+
+   flash1: flash@40100000 {
+    compatible = "renesas,ra-nv-data-flash";
+    reg = <0x40100000 ((8) * 1024)>;
+    write-block-size = <1>;
+    erase-block-size = <1024>;
+    programming-enable;
+   };
+  };
+ };
+};
+# 10 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4.dts" 2
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4-pinctrl.dtsi" 1
+
+
+
+
+
+
+&pinctrl {
+ sci2_default: sci2_default {
+  group1 {
+
+   psels = <(1 << 13 | 0x4 << 8 | 3 << 0 | 2 << 4)>;
+   drive-strength = "medium";
+  };
+
+  group2 {
+
+   psels = <(1 << 13 | 0x4 << 8 | 3 << 0 | 1 << 4)>;
+  };
+ };
+
+ iic1_default: iic1_default {
+  group1 {
+
+   psels = <(1 << 13 | 0x7 << 8 | 1 << 0 | 0 << 4)>,
+    <(1 << 13 | 0x7 << 8 | 1 << 0 | 1 << 4)>;
+   drive-strength = "medium";
+  };
+ };
+
+ adc0_default: adc0_default {
+  group1 {
+
+   psels = <(1 << 13 | 0x0 << 8 | 0 << 0 | 9 << 4)>,
+    <(1 << 13 | 0x0 << 8 | 0 << 0 | 0 << 4)>,
+    <(1 << 13 | 0x0 << 8 | 0 << 0 | 1 << 4)>,
+    <(1 << 13 | 0x0 << 8 | 0 << 0 | 2 << 4)>;
+   renesas,analog-enable;
+  };
+ };
+
+ pwm7_default: pwm7_default {
+  group1 {
+
+   psels = <(1 << 13 | 0x3 << 8 | 3 << 0 | 4 << 4)>,
+    <(1 << 13 | 0x3 << 8 | 3 << 0 | 3 << 4)>;
+  };
+ };
+};
+# 11 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4.dts" 2
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/gpio/gpio.h" 1 3 4
+# 12 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4.dts" 2
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/adc/adc.h" 1 3 4
+# 9 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/adc/adc.h" 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/dt-util.h" 1 3 4
+# 19 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/dt-util.h" 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_macro.h" 1 3 4
+# 34 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_macro.h" 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal.h" 1 3 4
+# 18 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal.h" 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_loops.h" 1 3 4
+# 1083 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_loops.h" 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_listify.h" 1 3 4
+# 1084 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_loops.h" 2 3 4
+# 19 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal.h" 2 3 4
+# 162 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal.h" 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal_is_eq.h" 1 3 4
+# 163 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal.h" 2 3 4
+# 193 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal.h" 3 4
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal_util_inc.h" 1 3 4
+# 194 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal.h" 2 3 4
+
+
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal_util_dec.h" 1 3 4
+# 197 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal.h" 2 3 4
+
+
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal_util_x2.h" 1 3 4
+# 200 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal.h" 2 3 4
+# 35 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_macro.h" 2 3 4
+# 20 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/dt-util.h" 2 3 4
+# 10 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/adc/adc.h" 2 3 4
+# 13 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4.dts" 2
+
+/ {
+ model = "Arduino Uno R4 Board";
+ compatible = "renesas,ra4m1", "renesas,ra";
+
+ chosen {
+  zephyr,console = &uart2;
+  zephyr,shell-uart = &uart2;
+  zephyr,sram = &sram0;
+  zephyr,flash = &flash0;
+  zephyr,entropy = &trng;
+  zephyr,code-partition = &code_partition;
+ };
+};
+
+&sci2 {
+ status = "okay";
+ pinctrl-0 = <&sci2_default>;
+ pinctrl-names = "default";
+ interrupts = <0 1>, <1 1>, <2 1>, <3 1>;
+ interrupt-names = "rxi", "txi", "tei", "eri";
+
+ uart2: uart {
+  current-speed = <115200>;
+  status = "okay";
+ };
+};
+
+&ioport0 {
+ status = "okay";
+};
+
+&ioport1 {
+ status = "okay";
+};
+
+&ioport3 {
+ status = "okay";
+};
+
+&adc0 {
+ status = "okay";
+ pinctrl-0 = <&adc0_default>;
+ pinctrl-names = "default";
+};
+
+&port_irq0 {
+ interrupts = <27 12>;
+ status = "okay";
+};
+
+&port_irq1 {
+ interrupts = <28 12>;
+ status = "okay";
+};
+
+&trng {
+ status = "okay";
+};
+
+&pwm7 {
+ pinctrl-0 = <&pwm7_default>;
+ pinctrl-names = "default";
+ interrupts = <8 1>, <9 1>;
+ interrupt-names = "gtioca", "overflow";
+ status = "okay";
+};
+
+&iic1 {
+ pinctrl-0 = <&iic1_default>;
+ pinctrl-names = "default";
+ #address-cells = <1>;
+ #size-cells = <0>;
+ clock-frequency = <(((1) * 1000) * 1000)>;
+ interrupts = <10 1>, <11 1>, <12 1>, <13 1>;
+ interrupt-names = "rxi", "txi", "tei", "eri";
+ status = "okay";
+};
+
+&flash0 {
+ partitions {
+  compatible = "fixed-partitions";
+  #address-cells = <1>;
+  #size-cells = <1>;
+
+  boot_partition: partition@0 {
+   label = "bootloader";
+   reg = <0x00000000 0x4000>;
+   read-only;
+  };
+
+  code_partition: partition@4000 {
+   label = "code";
+   reg = <0x4000 0x3C000>;
+   read-only;
+  };
+ };
+};
+
+&hoco {
+ status = "okay";
+ clock-frequency = <48000000>;
+};
+
+&pclkblock {
+ clocks = <&hoco>;
+};
+
+&iclk {
+ div = <1>;
+};
+
+&pclka {
+ div = <1>;
+};
+
+&pclkb {
+ div = <2>;
+};
+
+&pclkc {
+ div = <1>;
+};
+
+&pclkd {
+ div = <1>;
+};
+
+&fclk {
+ div = <2>;
+};
+# 0 "<command-line>" 2
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4_wifi.overlay" 1
+
+
+
+
+
+
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4_wifi-pinctrl.dtsi" 1
+
+
+
+
+
+
+&pinctrl {
+ iic0_default: iic0_default {
+  group1 {
+
+   psels = <(1 << 13 | 0x7 << 8 | 4 << 0 | 0 << 4)>,
+    <(1 << 13 | 0x7 << 8 | 4 << 0 | 1 << 4)>;
+   drive-strength = "medium";
+  };
+ };
+
+ spi0_default: spi0_default {
+  group1 {
+
+   psels = <(1 << 13 | 0x6 << 8 | 4 << 0 | 11 << 4)>,
+    <(1 << 13 | 0x6 << 8 | 4 << 0 | 10 << 4)>,
+    <(1 << 13 | 0x6 << 8 | 1 << 0 | 2 << 4)>,
+    <(1 << 13 | 0x6 << 8 | 1 << 0 | 3 << 4)>;
+  };
+ };
+};
+# 8 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4_wifi.overlay" 2
+
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/gpio/arduino-header-r3.h" 1 3 4
+# 10 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4_wifi.overlay" 2
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/pwm/pwm.h" 1 3 4
+# 11 "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_r4/arduino_uno_r4_wifi.overlay" 2
+
+
+/ {
+ model = "Arduino Uno R4 WiFi";
+
+ leds {
+  compatible = "gpio-leds";
+
+  led: led {
+   gpios = <&arduino_header 19 (0 << 0)>;
+  };
+ };
+
+ pwm_leds {
+  compatible = "pwm-leds";
+  status = "disabled";
+
+  pwm_led: pwm_led {
+   pwms = <&arduino_pwm 19 (((1) * 1000UL) * 1000UL) (0 << 0)>;
+   label = "PWM_LED";
+  };
+ };
+
+ aliases {
+  led0 = &led;
+  pwm-led0 = &pwm_led;
+ };
+
+ arduino_header: connector {
+  compatible = "arduino-header-r3";
+  #gpio-cells = <2>;
+  gpio-map-mask = <0xffffffff 0xffffffc0>;
+  gpio-map-pass-thru = <0 0x3f>;
+  gpio-map = <0 0 &ioport0 14 0>,
+      <1 0 &ioport0 0 0>,
+      <2 0 &ioport0 1 0>,
+      <3 0 &ioport0 2 0>,
+      <4 0 &ioport1 1 0>,
+      <5 0 &ioport1 0 0>,
+      <6 0 &ioport3 1 0>,
+      <7 0 &ioport3 2 0>,
+      <8 0 &ioport1 4 0>,
+      <9 0 &ioport1 5 0>,
+      <10 0 &ioport1 6 0>,
+      <11 0 &ioport1 7 0>,
+      <12 0 &ioport1 11 0>,
+      <13 0 &ioport1 12 0>,
+      <14 0 &ioport3 4 0>,
+      <15 0 &ioport3 3 0>,
+      <16 0 &ioport1 3 0>,
+      <17 0 &ioport4 11 0>,
+      <18 0 &ioport4 10 0>,
+      <19 0 &ioport1 2 0>,
+      <20 0 &ioport1 1 0>,
+      <21 0 &ioport1 0 0>;
+ };
+
+ arduino_adc: analog-connector {
+  compatible = "arduino,uno-adc";
+  #io-channel-cells = <1>;
+  io-channel-map = <0 &adc0 9>,
+     <1 &adc0 0>,
+     <2 &adc0 1>,
+     <3 &adc0 2>,
+     <4 &adc0 21>,
+     <5 &adc0 22>;
+ };
+
+ arduino_pwm: connector-pwm {
+  compatible = "arduino-header-pwm";
+  #pwm-cells = <3>;
+  pwm-map = <8 0 0 &pwm1 1 0 0>,
+     <9 0 0 &pwm1 0 0 0>,
+     <10 0 0 &pwm0 1 0 0>,
+     <11 0 0 &pwm0 0 0 0>,
+     <12 0 0 &pwm3 0 0 0>,
+     <13 0 0 &pwm3 1 0 0>,
+     <14 0 0 &pwm7 0 0 0>,
+     <15 0 0 &pwm7 1 0 0>,
+     <16 0 0 &pwm2 0 0 0>,
+     <17 0 0 &pwm6 0 0 0>,
+     <18 0 0 &pwm6 1 0 0>,
+     <19 0 0 &pwm2 1 0 0>;
+  pwm-map-mask = <0xffffffff 0x0 0x0>;
+  pwm-map-pass-thru = <0x0 0xffffffff 0xffffffff>;
+ };
+};
+
+&ioport4 {
+ status = "okay";
+};
+
+&spi0 {
+ pinctrl-0 = <&spi0_default>;
+ pinctrl-names = "default";
+ interrupts = <28 1>, <29 1>, <30 1>, <31 1>;
+ interrupt-names = "rxi", "txi", "tei", "eri";
+ status = "okay";
+};
+
+&iic0 {
+ pinctrl-0 = <&iic0_default>;
+ pinctrl-names = "default";
+ #address-cells = <1>;
+ #size-cells = <0>;
+ clock-frequency = <(((1) * 1000) * 1000)>;
+ interrupts = <14 1>, <15 1>, <16 1>, <17 1>;
+ interrupt-names = "rxi", "txi", "tei", "eri";
+ status = "okay";
+};
+
+zephyr_i2c: &iic0 {};
+
+arduino_i2c: &iic1 {};
+
+arduino_spi: &spi0 {};
+# 0 "<command-line>" 2
+# 1 "/home/pecosdwilly/omni-tool-spectral-core/zephyr_d16_app/app.overlay" 1
+# 10 "/home/pecosdwilly/omni-tool-spectral-core/zephyr_d16_app/app.overlay"
+/ {
+ leds {
+  compatible = "gpio-leds";
+
+
+
+  led3_red: led_matrix_1 {
+   gpios = <&ioport0 3 (0 << 0)>;
+   label = "Matrix Pin 1";
+  };
+
+
+  led3_green: led_matrix_2 {
+   gpios = <&ioport0 4 (0 << 0)>;
+   label = "Matrix Pin 2";
+  };
+
+
+  led3_blue: led_matrix_3 {
+   gpios = <&ioport0 11 (0 << 0)>;
+   label = "Matrix Pin 3";
+  };
+ };
+
+ aliases {
+  led-red = &led3_red;
+  led-green = &led3_green;
+  led-blue = &led3_blue;
+ };
+};
+# 0 "<command-line>" 2
+# 1 "/home/pecosdwilly/zephyrproject/zephyr/misc/empty_file.c"

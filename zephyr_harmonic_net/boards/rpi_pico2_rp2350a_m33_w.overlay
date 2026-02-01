@@ -1,0 +1,24 @@
+/*
+ * Overlay for Raspberry Pi Pico 2 W
+ * - Defines GPIOs for PIO Harmonic Signal
+ */
+
+/ {
+    harmonic_output: harmonic_output {
+        compatible = "gpio-keys";
+        /* Using GPIO 2 and 3 for Harmonic Signal output */
+        signal_a: signal_a {
+            gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>;
+            label = "Harmonic Signal A";
+        };
+        signal_b: signal_b {
+            gpios = <&gpio0 3 GPIO_ACTIVE_HIGH>;
+            label = "Harmonic Signal B";
+        };
+    };
+    
+    aliases {
+        harmonic-a = &signal_a;
+        harmonic-b = &signal_b;
+    };
+};

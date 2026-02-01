@@ -1,0 +1,12 @@
+# Documentation artifacts
+docs/_build/
+docs/_doxygen/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Build artifacts
+**/twister-out*/
+**/build/**
+.cache/
