@@ -1,7 +1,13 @@
 empty_file.o: /home/pecosdwilly/zephyrproject/zephyr/misc/empty_file.c \
- /home/pecosdwilly/zephyrproject/zephyr/boards/raspberrypi/rpi_pico2/rpi_pico2_rp2350a_m33_w.dts \
- /home/pecosdwilly/zephyrproject/zephyr/dts/vendor/raspberrypi/rpi_pico/rp2350a.dtsi \
- /home/pecosdwilly/zephyrproject/zephyr/dts/vendor/raspberrypi/rpi_pico/rp2350.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_q/arduino_uno_q.dts \
+ /home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_q/arduino_uno_q-common.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/arm/st/u5/stm32u585Xi.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/arm/st/u5/stm32u585.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/arm/st/u5/stm32u575.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/arm/st/u5/stm32u5_usbotg_fs.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/arm/st/u5/stm32u5.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/arm/armv8-m.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/common/skeleton.dtsi \
  /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/adc/adc.h \
  /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/dt-util.h \
  /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_macro.h \
@@ -12,22 +18,29 @@ empty_file.o: /home/pecosdwilly/zephyrproject/zephyr/misc/empty_file.c \
  /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal_util_inc.h \
  /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal_util_dec.h \
  /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/sys/util_internal_util_x2.h \
- /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/gpio/gpio.h \
- /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/clock/rpi_pico_rp2350_clock.h \
- /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/clock/rpi_pico_clock_common.h \
- /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/i2c/i2c.h \
- /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/regulator/rpi_pico.h \
- /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/reset/rp2350_reset.h \
- /home/pecosdwilly/zephyrproject/zephyr/dts/common/mem.h \
- /home/pecosdwilly/zephyrproject/zephyr/dts/arm/raspberrypi/rpi_pico/m33.dtsi \
- /home/pecosdwilly/zephyrproject/zephyr/dts/arm/armv8-m.dtsi \
- /home/pecosdwilly/zephyrproject/zephyr/dts/common/skeleton.dtsi \
- /home/pecosdwilly/zephyrproject/zephyr/boards/raspberrypi/rpi_pico2/rpi_pico2.dtsi \
- /home/pecosdwilly/zephyrproject/zephyr/dts/common/freq.h \
  /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/pwm/pwm.h \
- /home/pecosdwilly/zephyrproject/zephyr/boards/raspberrypi/rpi_pico2/rpi_pico2-pinctrl.dtsi \
- /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/pinctrl/rpi-pico-rp2350a-pinctrl.h \
- /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/pinctrl/rpi-pico-rp2350-pinctrl-common.h \
- /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/pinctrl/rpi-pico-pinctrl-common.h \
- /home/pecosdwilly/zephyrproject/zephyr/boards/raspberrypi/rpi_pico2/../common/rpi_pico-pinctrl-common.dtsi \
- /home/pecosdwilly/omni-tool-spectral-core/zephyr_harmonic_net/boards/rpi_pico2_rp2350a_m33_w.overlay
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/clock/stm32u5_clock.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/clock/stm32_common_clocks.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/gpio/gpio.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/i2c/i2c.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/flash_controller/ospi.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/reset/stm32u5_reset.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/reset/stm32-common.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/dma/stm32_dma.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/adc/stm32u5_adc.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/adc/stm32_adc.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/power/stm32_pwr.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/sensor/qdec_stm32.h \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/common/freq.h \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/common/mem.h \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/arm/st/u5/stm32u5_extra.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/memory-controller/stm32-fmc-nor-psram.h \
+ /home/pecosdwilly/zephyrproject/zephyr/dts/arm/st/u5/stm32u5_crypt.dtsi \
+ /home/pecosdwilly/zephyrproject/modules/hal/stm32/dts/st/u5/stm32u585aiixq-pinctrl.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/pinctrl/stm32-pinctrl.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/pinctrl/stm32-pinctrl-common.h \
+ /home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_q/arduino_r3_connector.dtsi \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/gpio/arduino-header-r3.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/input/input-event-codes.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/memory-attr/memory-attr.h \
+ /home/pecosdwilly/zephyrproject/zephyr/include/zephyr/dt-bindings/memory-attr/memory-attr-arm.h

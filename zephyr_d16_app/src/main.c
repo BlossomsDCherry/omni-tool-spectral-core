@@ -6,6 +6,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/usb/usb_device.h>
 #include <math.h>
 
 LOG_MODULE_REGISTER(d16_app, LOG_LEVEL_INF);
@@ -23,6 +24,12 @@ void main(void)
 	LOG_INF("⚓ OMNI-TOOL: Zephyr D16 Firmware Active (Uno Q STM32U585) 🌊");
 	LOG_INF("🏎️  Initializing D16 Harmonic Pulse on RGB LEDs...");
 
+	/* Enable USB Console */
+	if (usb_enable(NULL)) {
+		LOG_ERR("Failed to enable USB");
+		return;
+	}
+
 	if (!gpio_is_ready_dt(&led3_red) || !gpio_is_ready_dt(&led3_green) || !gpio_is_ready_dt(&led3_blue)) {
 		LOG_ERR("RGB LED devices not ready");
 		return;
@@ -37,22 +44,30 @@ void main(void)
 		/* Calculate spectral intensity driven by TAU */
 		float time = (float)moment * 0.01f; // 10ms steps
 		
-		/* Channel 1 (Red): Fundamental */
-		float val_r = (sinf(time) + 1.0f) / 2.0f;
-		
-		/* Channel 2 (Green): Harmonic (Perfect Fifth) */
-		float val_g = (sinf(time * 1.5f) + 1.0f) / 2.0f;
-		
-		/* Channel 3 (Blue): Octave */
-		float val_b = (sinf(time * 2.0f) + 1.0f) / 2.0f;
+		/* Noble Gas Stability Check (Bridge Logic) */
+		/* Shells: 2, 10, 18, 26. Scaled to seconds (moment/100) for visibility */
+		int shell_pos = (moment / 100) % 30; 
+		bool is_stable = (shell_pos == 2 || shell_pos == 10 || shell_pos == 18 || shell_pos == 26);
 
-		/* Software PWM simulation for "Brezhing" effect */
-		/* Ideally we'd use PWM driver, but GPIO toggle works for demonstration */
-		
-		// Simple thresholding for on/off blink based on wave
-		gpio_pin_set_dt(&led3_red, val_r > 0.5f ? 1 : 0);
-		gpio_pin_set_dt(&led3_green, val_g > 0.5f ? 1 : 0);
-		gpio_pin_set_dt(&led3_blue, val_b > 0.5f ? 1 : 0);
+		if (is_stable) {
+			/* Stability = White Light (Full Coherence) */
+			gpio_pin_set_dt(&led3_red, 1);
+			gpio_pin_set_dt(&led3_green, 1);
+			gpio_pin_set_dt(&led3_blue, 1);
+		} else {
+			/* Channel 1 (Red): Fundamental */
+			float val_r = (sinf(time) + 1.0f) / 2.0f;
+			
+			/* Channel 2 (Green): Harmonic (Perfect Fifth) */
+			float val_g = (sinf(time * 1.5f) + 1.0f) / 2.0f;
+			
+			/* Channel 3 (Blue): Octave */
+			float val_b = (sinf(time * 2.0f) + 1.0f) / 2.0f;
+
+			gpio_pin_set_dt(&led3_red, val_r > 0.5f ? 1 : 0);
+			gpio_pin_set_dt(&led3_green, val_g > 0.5f ? 1 : 0);
+			gpio_pin_set_dt(&led3_blue, val_b > 0.5f ? 1 : 0);
+		}
 		
 		moment++;
 		k_msleep(SLEEP_TIME_MS);

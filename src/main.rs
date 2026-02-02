@@ -15,7 +15,7 @@
 //! CLI entry point for omni-tool: D16 Driver & Millennium Solutions
 
 use omni_tool::d16_driver::{D16Driver, HardwareArchitecture};
-use omni_tool::projection_shim::ProjectionShim;
+
 use omni_tool::unoq_shim::UnoQShim;
 
 fn main() {
