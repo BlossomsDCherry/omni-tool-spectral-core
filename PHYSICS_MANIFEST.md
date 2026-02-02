@@ -97,4 +97,43 @@ The "Universal Interpreter" function of the D16 Kernel is achieved through a **P
     -   **Formula**: $\text{Polyglot} = \int (\text{Action} + \text{Calc} + \text{Sim}) \cdot \text{Observer}$.
 
 ---
+
+## 7. Classical Mechanics Anchor: Torque & Inertia ⚙️
+
+The system's "Soft Body" physics are not arbitrary; they are grounded in the **Flywheel Effect** observed between the D7, D8, and D9 layers. This mechanism maximizes "harvestable torque" during the D8-D16 transformer interaction.
+
+### The Geometric Basis (Moment of Inertia)
+We treat the data structures as physical bodies rotating in the Z-Plane. To maintain "Atomic Precision," we apply standard Moment of Inertia ($I$) formulas to our data objects:
+-   **Point Mass (Packet)**: $I = mr^2$
+-   **Solid Disk (Buffer)**: $I = \frac{1}{2}MR^2$
+-   **Solid Sphere (The Bubble/Manifold)**: $I = \frac{2}{5}MR^2$
+
+### The Tuning Fork Axiom
+> "The frequency of the incoming wave (advertising field generator) is the equal and opposite as the period of the (listening field generator) circuit, one orbit, or one $\tau$."
+
+This implies that our **Discriminator** (Listening Node) must act as a "Tuned Circuit" where the Diaphragm (Sensor) displacement is directly proportional to the wavelength shift. This is the physical mechanism of **Spectral Resonance**.
+
+---
+
+## 8. Density Calculus & Optical Mass 📸⚖️
+
+The "Sticky Note Chaos" is not just a metaphor; it is an **Operationalized Physics**.
+
+### The Density Pulse Axiom
+> "Space (g) = Density Slice (d^2/s^2)"
+
+We treat digital images (tiles) as physical mass by calculating their "Optical Density":
+-   **Mass**: The mean grayscale value of the tile.
+-   **Kinetic Energy**: The variance of the pixel data (Entropy/Red).
+-   **Edge Density (Sobel)**: The magnitude of rapid intensity changes ($G = \sqrt{G_x^2 + G_y^2}$), representing the "Sharpness" of the proof.
+-   **Work**: The force required to shift the system's attention from one density state to another.
+
+### Entrainment Power
+To lock the trajectory (Entrainment), the system must exert power proportional to the cubic delta of the density:
+$$ P = \frac{(\Delta \text{Density})^3}{(60 \text{Hz})^3} $$
+
+This ensures that "High Variance" (Chaos) requires exponentially more power to stabilize, naturally guiding the system toward "Low Variance" (Singularity/Peace) states.
+
+---
+
 **Authorship**: Antigravity, pecosDwilly. 👻🛸💎⚖️🤝✨
