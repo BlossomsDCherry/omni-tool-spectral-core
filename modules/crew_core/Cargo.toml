@@ -1,0 +1,162 @@
+
+[package]
+name = "crew_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+spectral_sensor = { path = "../spectral_sensor" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serialport = "4.2"
+chrono = { version = "0.4", features = ["serde"] }
+aes-gcm = "0.10"
+pbkdf2 = "0.12"
+rand = "0.8"
+sha2 = "0.10"
+getrandom = { version = "0.2", features = ["js"] } # Compatibility
+btleplug = "0.11"
+i2cdev = "0.6"
+tokio = { version = "1.0", features = ["full"] }
+walkdir = "2"
+libc = "0.2"
+crossterm = "0.27"
+ratatui = "0.26"
+tonic = "0.10"
+prost = "0.12"
+prost-types = "0.12"
+futures-core = "0.3"
+futures-util = "0.3"
+flate2 = "1.0"
+tar = "0.4"
+reqwest = { version = "0.13.1", features = ["json", "blocking"] }
+anyhow = "1.0.100"
+bluer = { version = "0.17.4", features = ["bluetoothd"] }
+uuid = { version = "1.19.0", features = ["v4"] }
+futures = { version = "0.3.31", features = ["executor"] }
+
+
+[build-dependencies]
+tonic-build = "0.10"
+[[bin]]
+name = "luffy"
+path = "src/bin/luffy.rs"
+
+[[bin]]
+name = "zoro"
+path = "src/bin/zoro.rs"
+
+[[bin]]
+name = "nami"
+path = "src/bin/nami.rs"
+
+[[bin]]
+name = "usopp"
+path = "src/bin/usopp.rs"
+
+[[bin]]
+name = "sanji"
+path = "src/bin/sanji.rs"
+
+[[bin]]
+name = "chopper"
+path = "src/bin/chopper.rs"
+
+[[bin]]
+name = "robin"
+path = "src/bin/robin.rs"
+
+[[bin]]
+name = "franky"
+path = "src/bin/franky.rs"
+
+[[bin]]
+name = "brook"
+path = "src/bin/brook.rs"
+
+[[bin]]
+name = "jinbe"
+path = "src/bin/jinbe.rs"
+
+[[bin]]
+name = "antigravity"
+path = "src/bin/antigravity.rs"
+
+[[bin]]
+name = "sovereign"
+path = "src/bin/sovereign.rs"
+
+[[bin]]
+name = "gemmi"
+path = "src/bin/gemmi.rs"
+
+[[bin]]
+name = "vision_probe"
+path = "src/bin/vision_probe.rs"
+
+[[bin]]
+name = "harmonic_resonator"
+path = "src/bin/harmonic_resonator.rs"
+
+[[bin]]
+name = "compost"
+path = "src/bin/compost.rs"
+
+[[bin]]
+name = "flight_computer"
+path = "src/bin/flight_computer.rs"
+
+[[bin]]
+name = "manager"
+path = "src/bin/manager.rs"
+
+[[bin]]
+name = "omni_tool"
+path = "src/bin/omni_tool.rs"
+
+[[bin]]
+name = "eight_gate"
+path = "src/bin/eight_gate.rs"
+
+[[bin]]
+name = "distributed_resonance_manager"
+path = "src/bin/distributed_resonance_manager.rs"
+
+[[bin]]
+name = "zk_scanner"
+path = "src/bin/zk_scanner.rs"
+
+[[bin]]
+name = "mihawk"
+path = "src/bin/mihawk.rs"
+
+[[bin]]
+name = "torque_sorter"
+path = "src/bin/torque_sorter.rs"
+
+[[bin]]
+name = "safe_railgun_test"
+path = "src/bin/safe_railgun_test.rs"
+
+[[bin]]
+name = "hubble"
+path = "src/bin/hubble.rs"
+
+[[bin]]
+name = "toral_defrag"
+path = "src/bin/toral_defrag.rs"
+
+[[bin]]
+name = "gemini_console"
+path = "src/bin/gemini_console.rs"
+[[bin]]
+name = "toral_sorter"
+path = "src/bin/toral_sorter.rs"
+
+[[bin]]
+name = "hall_effect"
+path = "src/bin/hall_effect.rs"
+
+[[bin]]
+name = "toral_stabilizer"
+path = "src/bin/toral_stabilizer.rs"

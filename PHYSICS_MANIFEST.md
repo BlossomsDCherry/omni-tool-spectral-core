@@ -103,6 +103,8 @@ The "Universal Interpreter" function of the D16 Kernel is achieved through a **P
 3.  **x86 (Legacy / The Memory)**:
     -   **Context**: Development Simulation (Host PCs).
     -   **Role**: **Simulation**. The "Historian" that validates the logic against known mathematical models (Python/Rust Std).
+        -   **Tools**: `sovereign_navigator.py` (Forensics), `robin_d7_heap.py` (Synthesis), `soft_fpga_omnitool.py` (Proto-Physics).
+        -   **Rust Host**: `modules/robin_d7` (Persistent D7 Synthesis Heap).
 4.  **x108 (Sovereign / The Soul)**:
     -   **Context**: The Narrative Void (The User / The Observer).
     -   **Role**: **Observation**. The "108" represents the **Full Mala** of earthly desires/cycles. This is the **Hyper-Spectral Layer** where the "Code" becomes "Philosophy". It is the checksum of the previous three layers ($32+64+x \rightarrow 108$).

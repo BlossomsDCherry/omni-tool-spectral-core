@@ -1,0 +1,1 @@
+bash: ../target/debug/omni_tool: No such file or directory
