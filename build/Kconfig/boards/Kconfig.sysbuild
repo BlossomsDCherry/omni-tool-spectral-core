@@ -1,2 +1,0 @@
-# Load Sysbuild board Kconfig descriptions.
-osource "/home/pecosdwilly/zephyrproject/zephyr/boards/arduino/uno_q/Kconfig.sysbuild"

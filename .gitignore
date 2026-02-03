@@ -1,10 +1,12 @@
 target/
 build/
+build_*/
 **/*.rs.bk
 *.bin
 *.elf
 *.hex
 *.map
+*.log
 node_modules/
 .venv/
 __pycache__/
