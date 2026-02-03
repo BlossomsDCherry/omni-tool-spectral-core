@@ -11,7 +11,7 @@
 #include <zephyr/net/net_mgmt.h>
 #include <zephyr/net/wifi_mgmt.h>
 #include <zephyr/drivers/gpio.h>
-#include <hardware/pio.h>
+
 #include <zephyr/drivers/pinctrl.h>
 
 /* Hubble Includes */
@@ -37,7 +37,7 @@ LOG_MODULE_REGISTER(harmonic_net, LOG_LEVEL_INF);
 
 /* PIO Configuration */
 #define PIO_FREQ 432 // Hz
-#define LED0_NODE DT_ALIAS(led0)
+#define LED0_NODE DT_ALIAS(harmonic_a)
 
 /* Atomic Precision Constants */
 #define TAU 6.2831853
@@ -75,7 +75,7 @@ static void wifi_mgmt_event_handler(struct net_mgmt_event_callback *cb,
 {
 	if (mgmt_event == NET_EVENT_WIFI_AP_ENABLE_RESULT) {
 		LOG_INF("WiFi AP Enabled: %s", WIFI_SSID);
-	} else if (mgmt_event == NET_EVENT_WIFI_CLIENT_CONNECTED) {
+	} else if (mgmt_event == NET_EVENT_WIFI_AP_STA_CONNECTED) {
         LOG_INF("Client Connected to Harmonic Mesh");
     }
 }
@@ -94,7 +94,7 @@ static void setup_wifi_ap(void)
 	};
 	
 	net_mgmt_init_event_callback(&wifi_cb, wifi_mgmt_event_handler,
-				     NET_EVENT_WIFI_AP_ENABLE_RESULT | NET_EVENT_WIFI_CLIENT_CONNECTED);
+				     NET_EVENT_WIFI_AP_ENABLE_RESULT | NET_EVENT_WIFI_AP_STA_CONNECTED);
 	net_mgmt_add_event_callback(&wifi_cb);
 
     LOG_INF("Starting WiFi AP Mode...");
@@ -171,7 +171,7 @@ void main(void)
              /* Update Hubble Advertisement with "Spectral Status" */
              // hubble_ble_advertise_get(...)
              // bt_le_adv_start(...)
-             LOG_INF("Hubble Uplink: Broadcasting Spectral Mass (Psi: " STR(PSI) ")...");
+             LOG_INF("Hubble Uplink: Broadcasting Spectral Mass (Psi: " STRINGIFY(PSI) ")...");
              
              count = 0;
         }

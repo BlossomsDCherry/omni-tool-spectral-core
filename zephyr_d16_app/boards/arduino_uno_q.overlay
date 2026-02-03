@@ -1,0 +1,18 @@
+/*
+ * Overlay for Arduino Uno Q (STM32U585)
+ * Enables USB OTG FS for CDC ACM Console
+ */
+
+&usbotg_fs {
+    status = "okay";
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+};
+
+/ {
+    chosen {
+        zephyr,console = &cdc_acm_uart0;
+        zephyr,shell-uart = &cdc_acm_uart0;
+    };
+};

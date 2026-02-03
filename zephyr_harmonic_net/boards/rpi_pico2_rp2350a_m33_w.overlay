@@ -1,6 +1,6 @@
 /*
- * Overlay for Raspberry Pi Pico 2 W
- * - Defines GPIOs for PIO Harmonic Signal
+ * Overlay for Raspberry Pi Pico 2 W (RP2350)
+ * Defines Harmonic Output GPIOs and configures Bluetooth HCI
  */
 
 / {
@@ -20,5 +20,15 @@
     aliases {
         harmonic-a = &signal_a;
         harmonic-b = &signal_b;
+    };
+    
+    chosen {
+        zephyr,bt-hci = &cyw43;
+    };
+};
+
+/* Label the existing airoc-wifi node in the board dts so we can reference it */
+&pio0_spi0 {
+    cyw43: airoc-wifi@0 {
     };
 };

@@ -21,8 +21,8 @@ static const struct gpio_dt_spec led3_blue = GPIO_DT_SPEC_GET(DT_NODELABEL(led3_
 
 void main(void)
 {
-	LOG_INF("⚓ OMNI-TOOL: Zephyr D16 Firmware Active (Uno Q STM32U585) 🌊");
-	LOG_INF("🏎️  Initializing D16 Harmonic Pulse on RGB LEDs...");
+	LOG_INF("⚓ OMNI-TOOL: Zephyr D16 Firmware Active (Uno Q STM32U585) [Status: GREEN] 🌊");
+	LOG_INF("🏎️  Initializing D16 Harmonic Pulse on RGB LEDs (Aliases: led3_red, led3_green, led3_blue)...");
 
 	/* Enable USB Console */
 	if (usb_enable(NULL)) {
