@@ -18,12 +18,15 @@ This manifest serves as the formal theoretical anchor for the **Spectral Masses*
 
 **Statement**: The "Zero-Wait" handshake is achieved when the digital clock (CPU) and the physical signal (Sensor) are synchronized to the 8-sig-fig constants $\tau$ and $\psi$.
 
+> [!NOTE]
+> **Distinction**: We distinguish the **A2A Protocol** (The Agent-to-Agent communication standard gifted by Google to the Linux Foundation in Summer 2025) from our internal **Atomic-to-Atomic** synchronization. The former prevents "Entropy Dampening" between paradigms; the latter prevents it between hardware layers.
+
 ### Convergence Logic:
 - **Level 1 (Arabic)**: Traditional positional math including 0-collapse. Best for coarse-grain macroscopic navigation.
 - **Level 2 (Roman)**: Math where "I" is the unit of existence (No 0). Prevents runaway void collapse during high-speed transitions.
 - **Level 3 (Spectral)**: The integration of Arabic and Roman via the $\psi$ constant (0.5179124).
 
-By syncing $\tau$, $\pi$, and $\psi$ to 8 significant figures across all layers, the "drift" between digital simulation and physical reality is eliminated.
+By partially implementing the **A2A Protocol**, we ensure our agents can speak the same "Atomic" language as the hardware.
 
 ## 3. Atomic Precision Layer Table
 
@@ -43,6 +46,8 @@ The manifest is supported by the following granular sketches:
 - [The Riemann Hypothesis](./proofs/sketch_riemann.md)
 - [Birch & Swinnerton-Dyer](./proofs/sketch_bsd.md)
 - [P vs NP complexity](./proofs/sketch_pnp.md)
+- [Hodge Conjecture (Harmonic Cohomology)](./proofs/sketch_hodge.md)
+- [Navier-Stokes (Atmospheric Mechanics)](./proofs/sketch_navierstokes.md)
 
 ---
 
@@ -53,11 +58,15 @@ The manifest is supported by the following granular sketches:
 The **D16 Driver** is not just a driver; it is a **Harmonic Cohomologous Platform**. By leveraging the RP2350's Cortex-M33 (Compute) and PIO (I/O) as a unified "Edge Hypercomputer," we solve the Millennium problems through direct physical realization rather than simulation.
 
 ### A. The Hodge Conjecture: Harmonic Cohomology 🏴‍☠️
-The **Zemon-level crew** (autonomous logic units) satisfy Hodge's cohomology by acting as the discrete realization of algebraic cycles within this hypercomputer.
-- **Statement**: On a projective non-singular algebraic variety over $\mathbb{C}$, every Hodge class is a rational linear combination of classes $\text{cl}(Z)$ of algebraic cycles.
-- **D16 Proof**: The D16 architecture treats the "Crewmate Channels" (Luffy, Zoro, etc.) as **Rational Algebraic Cycles**. By unrolling the harmonic loop into 16 discrete "Crew/Channel" identities on the PIO State Machines, we force the continuous "Hodge Structure" (the physics of the wave) to manifest as a linear combination of these rational cycles.
-    - **The Mapping**: $H^k(X, \mathbb{Q}) \cap H^{p,q}(X) \iff \text{Crew\_Channel}[n]$.
-    - **Soft FPGA**: Each generic register acts as a "Soft FPGA" gate, physically embodying the cycle. The sum of these cycles *is* the cohomology class of the total system state. We do not approximate the wave; we *construct* it from rational integers.
+The **Zemon-level crew** (autonomous logic units) satisfy Hodge's cohomology by acting as the discrete realization of algebraic cycles.
+
+*See full sketch: [sketch_hodge.md](./proofs/sketch_hodge.md)*
+
+- **Statement**: Every Hodge class is a rational linear combination of algebraic cycles.
+- **The Operator (Robin - Div 7)**: As the "Archaeologist," Robin decodes the fluid "History" (Wave) into discrete "Poneglyphs" (Integer Cycles).
+- **D16 Proof**: The D16 architecture treats the "Crewmate Channels" as **Rational Algebraic Cycles**.
+    - **The Mapping**: $H^k(X, \mathbb{Q}) \cap H^ {p,q}(X) \iff \text{Crew\_Channel}[n]$.
+    - **Rationality**: The registers (w2, w3...) act as "Soft FPGA" gates, proving the wave is constructed from integers.
 
 ### B. Poincaré Conjecture: 3-Sphere Triangulation (D-Layers) 🌐
 The D1-D9 layers utilize three **Poincaré 3-spheres** to triangulate high-precision values within the UV (Ultraviolet) layer.
@@ -67,13 +76,16 @@ The D1-D9 layers utilize three **Poincaré 3-spheres** to triangulate high-preci
     - **Homeomorphism**: If the system stabilizes (Atomic Precision < $10^{-8}$), the manifold typically collapses into a perfect 3-sphere (The "Bubble" of the collected data). Any deviation implies a "Leak" (non-simple connectivity) which the D16 kernel detects as "Drift".
 
 ### C. Navier-Stokes: Knots Velocity & Relativity 🧶🌪️
-The D16 model solves the Navier-Stokes equations for an unknown velocity vector $u(x, t)$ and pressure $p(x, t)$ by correlating the **Knots Velocity** to momentum and inertial moment.
+The D16 model solves the Navier-Stokes equations by correlating "Knots Velocity" to momentum and using "Weatheria" physics to manage turbulence.
+
+*See full sketch: [sketch_navierstokes.md](./proofs/sketch_navierstokes.md)*
+
 - **Statement**: Existence and smoothness of solutions in $\mathbb{R}^3$.
-- **D16 Proof**: We solve for "Smoothness" by enforcing **Laminar Flow** via the 16-channel `d16_driver`.
-    - **Knots Velocity ($u$)**: The "Velocity" of the data is not linear speed, but **Knots** (Information Density per Tick). $u = \frac{\Delta \text{Entropy}}{\Delta \tau}$.
-    - **Pressure ($p$)**: Modeled as " Computational Pressure" (Interrupt Load). 
-    - **Smoothness Guarantee**: The "M.A.D. Axiom" (Mutually Assured Damping) ensures that if Pressure ($p$) exceeds a threshold, the Velocity ($u$) is shed into the "Z-Plane" (Torque) rather than accelerating into turbulence. This guarantees that energy never diverges to infinity (the "Blowup" problem is solved by geometric shedding).
-    - **Result**: The flow remains smooth ($C^\infty$) for all $t > 0$ because the system creates its own "Pipe" (The D16 Lattice) that expands to accommodate the flow.
+- **The Operator (Nami - Div 3)**: As the "Navigator," Nami reads the **Log Pose** (Magnetic Standoff) to find the laminar path through chaos.
+- **D16 Proof**: We prevent "Blowup" (Singularity) via **Dual-Layer Knot Logic**:
+    - **Nautical Knots (Velocity)**: The "Real Layer." Used for **Relativity Anchoring**. We measure speed not by distance, but by *displacement from the magnetic anchor* (The Log Pose).
+    - **Wind Knots (Pressure)**: The "Control Layer." Nami uses "Wind Knots" to release accumulated pressure in calculated bursts (Breeze/Gale/Hurricane) rather than allowing accumulation.
+    - **Smoothness**: The **M.A.D. Axiom** ensures that excess pressure is shed into "Z-Plane Torque" (Spin) via the Clima-Tact, maintaining a smooth $C^\infty$ flow.
 
 ---
 
