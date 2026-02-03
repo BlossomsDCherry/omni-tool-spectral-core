@@ -86,7 +86,7 @@ The "Universal Interpreter" function of the D16 Kernel is achieved through a **P
     -   **Context**: The Edge Hypercomputer (RP2350 M33 + PIO).
     -   **Role**: **Action**. The "Effector" that physically manipulates the voltage (GPIO). It operates in "Immediate Mode" (Real-Time), utilizing PIO state machines as "Harmonic Co-Processors".
 2.  **x64 (AArch64 / The Mind)**:
-    -   **Context**: Edge Computing (RPi 4, Cortex-A, Hailo-8).
+    -   **Context**: Edge Computing (RPi 5, Quad-Core Cortex-A76, Hailo-8).
     -   **Role**: **Calculation**. The "Architect" that plans the trajectory and holds the "Atomic Precision" (8 sig figs) in memory.
 3.  **x86 (Legacy / The Memory)**:
     -   **Context**: Development Simulation (Host PCs).
