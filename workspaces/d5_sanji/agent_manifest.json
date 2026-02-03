@@ -1,0 +1,9 @@
+{
+    "agent_id": "d5_sanji",
+    "name": "Sanji",
+    "role": "Cook",
+    "spectral_layer": "IR",
+    "description": "Thermodynamics, Energy, sustenance",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

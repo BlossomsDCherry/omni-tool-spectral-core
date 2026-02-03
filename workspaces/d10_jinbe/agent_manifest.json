@@ -1,0 +1,9 @@
+{
+    "agent_id": "d10_jinbe",
+    "name": "Jinbe",
+    "role": "Helmsman",
+    "spectral_layer": "YB",
+    "description": "Steering, Current, Momentum",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

@@ -1,0 +1,9 @@
+{
+    "agent_id": "d8_franky",
+    "name": "Franky",
+    "role": "Shipwright",
+    "spectral_layer": "IR",
+    "description": "Hardware, Drivers, Structure",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

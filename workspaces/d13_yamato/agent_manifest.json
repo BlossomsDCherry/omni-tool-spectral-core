@@ -1,0 +1,9 @@
+{
+    "agent_id": "d13_yamato",
+    "name": "Yamato",
+    "role": "Guardian",
+    "spectral_layer": "UV",
+    "description": "Identity, Masking, Protection",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

@@ -1,0 +1,9 @@
+{
+    "agent_id": "d16_law",
+    "name": "Law",
+    "role": "Surgeon",
+    "spectral_layer": "UV",
+    "description": "Spatial Ops, Room, Shambles",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

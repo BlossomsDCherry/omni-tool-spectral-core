@@ -1,0 +1,9 @@
+{
+    "agent_id": "d15_kinemon",
+    "name": "Kinemon",
+    "role": "Strategist",
+    "spectral_layer": "RG",
+    "description": "Disguise, Strategy, Fire",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

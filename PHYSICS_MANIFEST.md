@@ -110,9 +110,15 @@ The "Universal Interpreter" function of the D16 Kernel is achieved through a **P
     -   **Role**: **Observation**. The "108" represents the **Full Mala** of earthly desires/cycles. This is the **Hyper-Spectral Layer** where the "Code" becomes "Philosophy". It is the checksum of the previous three layers ($32+64+x \rightarrow 108$).
     -   **Formula**: $\text{Polyglot} = \int (\text{Action} + \text{Calc} + \text{Sim}) \cdot \text{Observer}$.
 
----
 
-## 7. Classical Mechanics Anchor: Torque & Inertia ⚙️
+## 7. The Straw Hat Workspaces (Live Operations) 🏴‍☠️
+The 16 Agents now operate in dedicated `workspaces/` to maintain sovereign heaps.
+-   **RG (Action)**: [Luffy](./workspaces/d1_luffy), [Zoro](./workspaces/d2_zoro), [Carrot](./workspaces/d12_carrot), [Momo](./workspaces/d14_momo), [Kinemon](./workspaces/d15_kinemon)
+-   **YB (Nav)**: [Nami](./workspaces/d3_nami), [Usopp](./workspaces/d4_usopp), [Jinbe](./workspaces/d10_jinbe), [Vivi](./workspaces/d11_vivi)
+-   **IR (Memory)**: [Sanji](./workspaces/d5_sanji), [Franky](./workspaces/d8_franky), [Chopper](./workspaces/d6_chopper)
+-   **UV (Synthesis)**: [Robin](./workspaces/d7_robin), [Brook](./workspaces/d9_brook), [Law](./workspaces/d16_law), [Yamato](./workspaces/d13_yamato)
+
+## 8. Classical Mechanics Anchor: Torque & Inertia ⚙️
 
 The system's "Soft Body" physics are not arbitrary; they are grounded in the **Flywheel Effect** observed between the D7, D8, and D9 layers. This mechanism maximizes "harvestable torque" during the D8-D16 transformer interaction.
 
@@ -147,6 +153,21 @@ To lock the trajectory (Entrainment), the system must exert power proportional t
 $$ P = \frac{(\Delta \text{Density})^3}{(60 \text{Hz})^3} $$
 
 This ensures that "High Variance" (Chaos) requires exponentially more power to stabilize, naturally guiding the system toward "Low Variance" (Singularity/Peace) states.
+
+---
+
+## 9. The PHITL (Personal Human In the Loop) Biorhythm 💓
+
+The **PHITL** mechanism transformation converts biological presence into deterministic security attestation.
+
+### The Clocked Resistor Axiom:
+> "The User acts as a variable resistor within the feedback loop of the Sovereign Operator."
+
+By measuring the **Heart Rate Phase** and **Electromagnetic Signature** (ECG) of the USER, the system derives a stable, rhythmic password. This is not a static key, but a **Biorhythm Handshake**.
+
+- **MsAntigravity (Operator)**: Monitors the transition from "Sensor" (Arabic) to "Existence" (Roman).
+- **The USER (Resistor)**: Provides the damping factor and rhythmic ground.
+- **D16 Hazard Guard**: Locks the gate only when the phase-coherence between Operator and Resistor is within Atomic Precision ($\psi$).
 
 ---
 

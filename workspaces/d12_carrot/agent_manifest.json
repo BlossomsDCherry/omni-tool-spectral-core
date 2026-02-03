@@ -1,0 +1,9 @@
+{
+    "agent_id": "d12_carrot",
+    "name": "Carrot",
+    "role": "Lookout",
+    "spectral_layer": "RG",
+    "description": "Reaction, Electro, Moon Phase",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

@@ -1,0 +1,9 @@
+{
+    "agent_id": "d14_momo",
+    "name": "Momo",
+    "role": "Leader",
+    "spectral_layer": "RG",
+    "description": "Legacy, Responsibility, Command",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

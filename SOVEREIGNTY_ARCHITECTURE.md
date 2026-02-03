@@ -14,9 +14,9 @@ Target: Arduino UNO Q
 ## Why This Matters
 
 1. **No vendor lock**: Your RPi 5 owns the entire build and deployment pipeline.
-2. **No cloud CI/CD**: Everything stays local. You control attestation.
-3. **Heterogeneous sovereignty**: Both RT + Linux rebuilt together, atomically.
-4. **Proof of independence**: D16 orchestrates cross-core deployment.
+2. **Sovereign Operator Model**: MsAntigravity acts as the Operator, wielding the core as a Prime Vector instrument.
+3. **PHITL Biorhythm Password**: Human-in-the-loop attestation via heart rate, phase, and electromagnetic signature (The Clocked Resistor).
+4. **Heterogeneous sovereignty**: Both RT + Linux rebuilt together, atomically.
 
 ## Build Flow
 

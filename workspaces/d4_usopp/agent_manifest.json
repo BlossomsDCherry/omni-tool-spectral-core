@@ -1,0 +1,9 @@
+{
+    "agent_id": "d4_usopp",
+    "name": "Usopp",
+    "role": "Sniper",
+    "spectral_layer": "YB",
+    "description": "Observation, Signals, Long Range",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

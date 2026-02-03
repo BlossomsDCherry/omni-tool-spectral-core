@@ -1,0 +1,9 @@
+{
+    "agent_id": "d11_vivi",
+    "name": "Vivi",
+    "role": "Diplomat",
+    "spectral_layer": "YB",
+    "description": "Protocol, Communication, Peace",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

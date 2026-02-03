@@ -1,0 +1,9 @@
+{
+    "agent_id": "d9_brook",
+    "name": "Brook",
+    "role": "Musician",
+    "spectral_layer": "UV",
+    "description": "Resonance, Soul, Frequency",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

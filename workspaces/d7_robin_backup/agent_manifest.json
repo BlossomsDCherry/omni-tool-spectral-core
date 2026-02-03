@@ -1,0 +1,9 @@
+{
+    "agent_id": "d7_robin",
+    "name": "Robin",
+    "role": "Archaeologist",
+    "spectral_layer": "UV",
+    "description": "Decoding, History, Synthesis",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

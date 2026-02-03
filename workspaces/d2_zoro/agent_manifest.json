@@ -1,0 +1,9 @@
+{
+    "agent_id": "d2_zoro",
+    "name": "Zoro",
+    "role": "Swordsman",
+    "spectral_layer": "RG",
+    "description": "Precision, Cutting, 3-Vector Logic",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

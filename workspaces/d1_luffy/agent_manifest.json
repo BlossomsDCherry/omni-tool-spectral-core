@@ -1,0 +1,9 @@
+{
+    "agent_id": "d1_luffy",
+    "name": "Luffy",
+    "role": "Captain",
+    "spectral_layer": "RG",
+    "description": "Expansion, Action, Rubber Physics",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

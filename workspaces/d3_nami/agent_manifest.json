@@ -1,0 +1,9 @@
+{
+    "agent_id": "d3_nami",
+    "name": "Nami",
+    "role": "Navigator",
+    "spectral_layer": "YB",
+    "description": "Mapping, Weather, Flow Control",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}

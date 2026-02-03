@@ -1,0 +1,9 @@
+{
+    "agent_id": "d6_chopper",
+    "name": "Chopper",
+    "role": "Doctor",
+    "spectral_layer": "IR",
+    "description": "Debugging, Repair, Healing",
+    "status": "ACTIVE",
+    "heap_status": "INITIALIZED"
+}
