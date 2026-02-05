@@ -98,7 +98,11 @@ The "Universal Interpreter" function of the D16 Kernel is achieved through a **P
 
 ### The Hierarchy of Resolution:
 1.  **x32 (Thumb-2 / The Hand)**:
-    -   **Context**: The Edge Hypercomputer (RP2350 M33 + PIO).
+    -   **Context**: The Edge- **Platform**: D16 / RP2350 (Cortex-M33 + PIO) & Rust Core (littleBIG Arch).
+    -   **Architecture**:
+        -   **Big Core**: Wave Equation Solver (FDTD) using $\tau$.
+        -   **Little Core**: Sobel-Feldman Operator for "Captain's Eyes" verification.
+    -   **Languages**: Rust (Physics), C (Drivers), Python (Legacy/Bridge).
     -   **Role**: **Action**. The "Effector" that physically manipulates the voltage (GPIO). It operates in "Immediate Mode" (Real-Time), utilizing PIO state machines as "Harmonic Co-Processors".
 2.  **x64 (AArch64 / The Mind)**:
     -   **Context**: Edge Computing (RPi 5, Quad-Core Cortex-A76, Hailo-8).
