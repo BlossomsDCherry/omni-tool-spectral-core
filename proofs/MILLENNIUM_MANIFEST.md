@@ -21,6 +21,7 @@ Each file contains a **proof sketch / mechanism outline**, not a fully formalize
 
 - **Location**: `./visual_evidence/`
 - **Contents**: Original handwritten derivations and Sobel edge–detected validation layers for Hodge, Navier–Stokes, and Poincaré.
+- **Supplemental**: `supplemental_doc0.png`, `supplemental_doc1.png` (Raw Archives).
 
 These serve as **lab‑notebook evidence** of the reasoning path: where the ideas came from, how they were refined, and how the geometric patterns actually look when traced.
 

@@ -14,3 +14,8 @@ __pycache__/
 .gemini/
 .antigravity/
 laboratory_archive_*.tar.gz
+modules/ms_antigravity_heartbeat/target
+modules/z_rr/target
+modules/crew_core/target
+**/build.release/
+**/*.log
