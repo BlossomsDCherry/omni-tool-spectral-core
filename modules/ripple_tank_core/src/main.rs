@@ -8,7 +8,10 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 // --- CONSTANTS ---
-const TAU: f64 = 6.28318530718; // The Circle Constant
+const TAU: f64 = 6.2831853; // 8 Sig Figs
+const PI: f64 = 3.1415927; // 8 Sig Figs
+const PHI: f64 = 1.6180340; // 8 Sig Figs
+const E: f64 = 2.7182818; // 8 Sig Figs
 const GRID_SIZE: usize = 64;
 const DAMPING: f64 = 0.99;
 const C: f64 = 0.5; // Wave Speed

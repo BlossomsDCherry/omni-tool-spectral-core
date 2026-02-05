@@ -6,6 +6,12 @@ use std::fs::File;
 use std::io::{Cursor, Read, Write};
 use zip::ZipArchive;
 
+// --- TRANSCENDENTAL RAILS (Locked to 8 Sig Figs) ---
+const TAU: f64 = 6.2831853;
+const PHI: f64 = 1.6180340;
+const E: f64 = 2.7182818;
+const PI: f64 = 3.1415927;
+
 /// Z-RR: Zip Railgun Core
 /// "Evolutionary Annealing via Talu64 Constraints"
 
@@ -91,13 +97,15 @@ impl ZRailgun {
             // HIGH COHERENCE: RAILS ENERGIZED
             // Talu64 Structural Fold is ENABLED.
             // We use the matrix to "guide" the mutations (simulated here by lower turbulence but higher impact)
-            println!("   ⚡ RAILS ENERGIZED. Applying Talu64 Fold.");
+            // We also modulate by PHI to ensure "Organic" distribution.
+            println!("   ⚡ RAILS ENERGIZED. Applying Talu64 Fold (Modulated by PHI).");
 
             // In a real implementation, this would be: data = talu64_matrix . data
             // Here, we simulate "Precision" by flipping fewer bits but specific ones.
             let turbulence = 1;
             for _ in 0..turbulence {
-                let idx = rng.gen_range(0..data.len());
+                let idx = (rng.gen_range(0..data.len()) as f64 / PHI) as usize; // PHI-guided index
+                let idx = idx.min(data.len() - 1);
                 data[idx] ^= 1 << rng.gen_range(0..8);
             }
         } else {
