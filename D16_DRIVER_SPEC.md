@@ -9,8 +9,7 @@ heterogeneous SoCs.
 ## 16 Layers
 
 **Layers 1–4 (Quantum)**: Sub-atomic precision, phase alignment
-- M33 timing, cycle-accurate RT guarantees
-- Spectral mass synchronization
+- M33 timing,- **Full Cycle**: A full cycle of the D16 is a 15 pass (measurement) scan. mass synchronization
 
 **Layers 5–8 (Atomic)**: Atomic precision, convergence point
 - τ-to-8-sig-fig precision boundary

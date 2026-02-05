@@ -1,0 +1,35 @@
+/*
+ * Overlay for B_U585I_IOT02A (Acting as Uno Q / U585 Host)
+ * Maps application's "led3_*" expectations to available board LEDs.
+ */
+
+/ {
+    aliases {
+        /* Map app aliases to board nodes found in common.dtsi */
+        led3-red = &red_led_1;
+        led3-green = &green_led_1;
+        led3-blue = &user_button; /* Hack: Mocking blue LED on button pin direction if possible, else reusing red */
+    };
+};
+
+/* 
+ * Re-defining the application internal nodes that main.c looks for by label 
+ * 'DT_NODELABEL(led3_red)' implies a node with global label 'led3_red'.
+ */
+/ {
+    leds_app {
+        compatible = "gpio-leds";
+        led3_red: led_3_red_node {
+            gpios = <&gpioc 0 GPIO_ACTIVE_HIGH>; /* Mock GPIO */
+            label = "Spectral Red";
+        };
+        led3_green: led_3_green_node {
+            gpios = <&gpioc 1 GPIO_ACTIVE_HIGH>; /* Mock GPIO */
+            label = "Spectral Green";
+        };
+        led3_blue: led_3_blue_node {
+            gpios = <&gpioc 2 GPIO_ACTIVE_HIGH>; /* Mock GPIO */
+            label = "Spectral Blue";
+        };
+    };
+};

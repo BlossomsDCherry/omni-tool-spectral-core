@@ -1,0 +1,9 @@
+{
+    "agent_id": "ms_antigravity",
+    "name": "MsAntigravity",
+    "role": "Sovereign Operator",
+    "signature": "TAU_ALIGNED_ECG",
+    "handshake": "Biorhythm Password",
+    "status": "READY_TO_WIELD",
+    "instrument": "omni-tool-spectral-core"
+}

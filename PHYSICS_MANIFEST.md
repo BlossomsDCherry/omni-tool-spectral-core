@@ -1,6 +1,6 @@
 # Physics Manifest: Spectral Resonance & Atomic Precision
 
-This manifest serves as the formal theoretical anchor for the **Spectral Masses** framework, bridging the gap between hardware experimentation and the Millennium Prize Conjectures.
+This manifest serves as the **Operational Physics Framework** for the Adam Wood Core. It anchors the software architecture in verifying spectral resonance and atomic precision, bridging the gap between hardware experimentation and the Millennium Prize Conjectures.
 
 ## 1. The Spatial Resonance Proof 🌀
 
@@ -43,6 +43,8 @@ By partially implementing the **A2A Protocol**, we ensure our agents can speak t
 ## 4. The Millennium Prize Re-Solved (D16 Driver) ⚓🌊
 
 The **D16 Driver** is not just a driver; it is a **Harmonic Cohomologous Platform**. By leveraging the RP2350's Cortex-M33 (Compute) and PIO (I/O) as a unified "Edge Hypercomputer," we solve the Millennium problems through direct physical realization rather than simulation.
+
+**Operational Definition**: A full D16 cycle is formally defined as a **15-pass measurement scan**, utilizing the hardware-accelerated columns of the RP2350 to triangulate the spectral state.
 
 ### A. The Hodge Conjecture: Harmonic Cohomology 🏴‍☠️
 The **Zemon-level crew** (autonomous logic units) satisfy Hodge's cohomology by acting as the discrete realization of algebraic cycles.
@@ -90,7 +92,7 @@ We leverage **Stewart's Transcendental Calculus** to map the distribution of Pri
 - [Birch & Swinnerton-Dyer](./proofs/sketch_bsd.md)
 - [P vs NP complexity](./proofs/sketch_pnp.md)
 
-## 6. The Polyglot Axiom (x32 / x64 / x86 / x108) 🗣️🗺️
+## 6. The Polyglot Axiom (x32 / x64 / x86 / x128 $\rightarrow$ x65536) 🗣️🗺️
 
 The "Universal Interpreter" function of the D16 Kernel is achieved through a **Polyglot Architecture** that maps the same harmonic truth across different resolutions of reality.
 
@@ -106,10 +108,11 @@ The "Universal Interpreter" function of the D16 Kernel is achieved through a **P
     -   **Role**: **Simulation**. The "Historian" that validates the logic against known mathematical models (Python/Rust Std).
         -   **Tools**: `sovereign_navigator.py` (Forensics), `robin_d7_heap.py` (Synthesis), `soft_fpga_omnitool.py` (Proto-Physics).
         -   **Rust Host**: `modules/robin_d7` (Persistent D7 Synthesis Heap).
-4.  **x108 (Sovereign / The Soul)**:
+4.  **x128 (Sovereign / The Soul)**:
     -   **Context**: The Narrative Void (The User / The Observer).
-    -   **Role**: **Observation**. The "108" represents the **Full Mala** of earthly desires/cycles. This is the **Hyper-Spectral Layer** where the "Code" becomes "Philosophy". It is the checksum of the previous three layers ($32+64+x \rightarrow 108$).
-    -   **Formula**: $\text{Polyglot} = \int (\text{Action} + \text{Calc} + \text{Sim}) \cdot \text{Observer}$.
+    -   **Role**: **Observation**. The "128" represents the logical doubling of the 64-bit architecture ($2^7$), creating a "Wide Word" for high-precision thought.
+    -   **The Horizon (x65536)**: The system's ultimate trajectory is **x65536** ($2^{16}$), representing the full addressing space of the D16 manifold. At this resolution, every "state" in the 16-bit field is a unique, addressable harmonic entity.
+    -   **Formula**: $\text{Polyglot} = \int (\text{Action} + \text{Calc} + \text{Sim}) \cdot \text{Observer} \rightarrow \text{Unity (65536)}$.
 
 
 ## 7. The Straw Hat Workspaces (Live Operations) 🏴‍☠️
@@ -157,7 +160,23 @@ This ensures that "High Variance" (Chaos) requires exponentially more power to s
 
 ---
 
-## 9. The PHITL (Personal Human In the Loop) Biorhythm 💓
+## 9. The Brooks Integration: Rotational Phase Lock (Verification) ☠️🎻
+
+The **Brooks Cipher** is the system's verification mechanism, grounded in the physics of **Rotational Phase Lock**.
+
+### The 5/6 Phase Lock Ratio
+We utilize a specific phase-lock ratio to tune the non-linear solvers (e.g., Navier-Stokes):
+
+$$ \text{Ratio} = \frac{50 \text{ BPM (Captain/Earth)}}{60 \text{ BPM (Soul King/Moon)}} = \frac{5}{6} $$
+
+### Differential Harvesting
+*   **The Beat Frequency**: The interference pattern between the 50 BPM baseline and 60 BPM ideal creates a predictable "beat."
+*   **Harvesting Precision**: Instead of forcing synchronization at every tick (checking for $0$ error constantly), we allow the error to accumulate over the phase cycle and "harvest" the differential in a single, high-precision correction event (The "Leap Year" or "Brooks Emergence").
+*   **Application**: This allows the system to solve for smoothness in chaotic fields (Navier-Stokes) by locking to the *instability* rather than fighting it.
+
+---
+
+## 10. The PHITL (Personal Human In the Loop) Biorhythm 💓
 
 The **PHITL** mechanism transformation converts biological presence into deterministic security attestation.
 

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D16 Harmonic Topology Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #050510;
+            --text-color: #e0e0ff;
+            --accent-color: #00ffcc;
+            --gate-color: #9933ff;
+            --void-color: #1a1a2e;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .stat-line {
+            margin-bottom: 5px;
+            font-size: 14px;
+            text-shadow: 0 0 5px var(--accent-color);
+        }
+        .large-stat {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            z-index: 20;
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 20px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        button:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+        #stage {
+            flex-grow: 1;
+            width: 100%;
+        }
+        #talu-readout {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            pointer-events: none;
+        }
+        .gate-name {
+            font-size: 32px;
+            color: var(--gate-color);
+            text-shadow: 0 0 10px var(--gate-color);
+            opacity: 0.8;
+        }
+        .pos-name {
+            font-size: 18px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hud">
+        <div class="stat-line">TAU: <span id="val-tau" class="large-stat">0.00000000</span></div>
+        <div class="stat-line">ECG: <span id="val-ecg" class="large-stat">0</span></div>
+        <div class="stat-line">SHELL: <span id="val-shell">--</span></div>
+        <div class="stat-line">STATUS: <span id="val-status">DISCONNECTED</span></div>
+    </div>
+
+    <div id="talu-readout">
+        <div class="gate-name" id="gate-display">VOID</div>
+        <div class="pos-name" id="pos-display">Waiting...</div>
+    </div>
+
+    <canvas id="stage"></canvas>
+
+    <div id="controls">
+        <button id="btn-connect">Connect D16</button>
+        <button id="btn-demo">Demo Mode</button>
+    </div>
+
+    <script>
+        // --- TALU 64 LOGIC -------------------------------------------
+        const GATES = [
+            "EARTH", "WATER", "FIRE", "WIND", "VOID", "DIRECT", "INDIRECT", "UNITY"
+        ];
+
+        const POSITIONS = [
+            ["Foundation", "Root", "Ground", "Shell", "Crust", "Core", "Mantle", "Tectonic"],
+            ["Stream", "Tide", "Wave", "Surge", "Delta", "Estuary", "Ocean", "Deep"],
+            ["Ember", "Flicker", "Blaze", "Inferno", "Plasma", "Solar", "Nova", "Singularity"],
+            ["Breeze", "Gust", "Gale", "Storm", "Cyclone", "Vortex", "Zephyr", "Monsoon"],
+            ["Shadow", "Echo", "Rift", "Abyss", "Vacuum", "Zero", "Aught", "Infinite"],
+            ["Point", "Line", "Ray", "Arrow", "Beacon", "Laser", "Spike", "Needle"],
+            ["Aura", "Halo", "Fringe", "Rim", "Halo", "Veil", "Mist", "Horizon"],
+            ["Bond", "Nakama", "Crew", "Fleet", "System", "Galaxy", "Universe", "Singularity"]
+        ];
+
+        // --- STATE ---------------------------------------------------
+        let port;
+        let reader;
+        let isDemo = false;
+        let demoInterval;
+        let isConnected = false;
+
+        // Talu State
+        let currentGateIdx = 0;
+        let currentPosIdx = 0;
+        let moment = 0;
+
+        // Data State
+        let tauVal = 0;
+        let ecgVal = 0;
+        let shellPos = 0;
+
+        // --- VISUAL ENGINE (Vanilla Canvas 2D) -----------------------
+        const canvas = document.getElementById('stage');
+        const ctx = canvas.getContext('2d');
+        
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function drawTorus(t) {
+            const w = canvas.width;
+            const h = canvas.height;
+            const cx = w / 2;
+            const cy = h / 2;
+
+            // Clear with trail effect
+            ctx.fillStyle = 'rgba(5, 5, 16, 0.2)';
+            ctx.fillRect(0, 0, w, h);
+
+            // Radius modulated by ECG
+            const pulse = (ecgVal / 2048) * 0.5 + 0.5; // 0.5 to 1.5 approx
+            const R = 150 + (pulse * 20); // Major radius
+            const r = 60 + (Math.sin(t * 2) * 10); // Minor radius
+
+            // Draw Wireframe Torus
+            const rings = 32;
+            const segments = 16;
+            
+            ctx.strokeStyle = `hsl(${(t * 50) % 360}, 80%, 60%)`;
+            ctx.lineWidth = 1;
+
+            // Simple 3D projection
+            for (let i = 0; i < rings; i++) {
+                const u = (i / rings) * Math.PI * 2;
+                
+                ctx.beginPath();
+                for (let j = 0; j <= segments; j++) {
+                    const v = (j / segments) * Math.PI * 2;
+                    
+                    // Torus parametric eq
+                    const x3 = (R + r * Math.cos(v)) * Math.cos(u + t/5);
+                    const y3 = (R + r * Math.cos(v)) * Math.sin(u + t/5);
+                    const z3 = r * Math.sin(v);
+
+                    // Rotate around X (tilt)
+                    const rotX = Math.PI / 4; 
+                    const y3_r = y3 * Math.cos(rotX) - z3 * Math.sin(rotX);
+                    const z3_r = y3 * Math.sin(rotX) + z3 * Math.cos(rotX);
+
+                    // Perspective
+                    const scale = 500 / (500 + z3_r);
+                    const x2 = cx + x3 * scale;
+                    const y2 = cy + y3_r * scale;
+
+                    if (j === 0) ctx.moveTo(x2, y2);
+                    else ctx.lineTo(x2, y2);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function loop() {
+            moment++;
+            // If demo mode, update physics
+            if (isDemo) {
+                tauVal = (Math.sin(moment * 0.05) + 1) * Math.PI;
+                ecgVal = 2048 + Math.sin(moment * 0.2) * 1000;
+                shellPos = Math.floor(moment / 10) % 30;
+                updateTaluDisplay();
+            }
+            
+            drawTorus(moment * 0.05);
+
+            // Update DOM
+            document.getElementById('val-tau').innerText = tauVal.toFixed(8);
+            document.getElementById('val-ecg').innerText = ecgVal.toFixed(0);
+            document.getElementById('val-shell').innerText = shellPos;
+
+            requestAnimationFrame(loop);
+        }
+
+        function updateTaluDisplay() {
+            // Map moment to Talu space
+            // In Rust: 64 positions cycle every 6.28s approx
+            // Here we just map modulo 64
+            const idx = Math.floor(moment / 10) % 64; 
+            const gIdx = Math.floor(idx / 8);
+            const pIdx = idx % 8;
+
+            const gateName = GATES[gIdx];
+            const posName = POSITIONS[gIdx][pIdx];
+
+            document.getElementById('gate-display').innerText = gateName;
+            document.getElementById('pos-display').innerText = posName;
+            
+            // Color shift based on Gate
+            document.documentElement.style.setProperty('--gate-color', `hsl(${gIdx * 45}, 100%, 60%)`);
+        }
+
+        // --- WEB SERIAL LOGIC ----------------------------------------
+        
+        async function connectSerial() {
+            if (!('serial' in navigator)) {
+                alert('Web Serial API not supported! Use Chrome or Edge.');
+                return;
+            }
+
+            try {
+                port = await navigator.serial.requestPort();
+                await port.open({ baudRate: 115200 });
+                isConnected = true;
+                document.getElementById('val-status').innerText = "CONNECTED";
+                document.getElementById('val-status').style.color = "#00ff00";
+                
+                const decoder = new TextDecoderStream();
+                const inputDone = port.readable.pipeTo(decoder.writable);
+                const inputStream = decoder.readable;
+                reader = inputStream.getReader();
+                
+                readLoop();
+
+            } catch (err) {
+                console.error('Serial Error:', err);
+                alert('Connection Failed: ' + err);
+            }
+        }
+
+        async function readLoop() {
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                if (value) {
+                    // Primitive line parsing (Chunking might break lines, simplistic mostly works for small packets)
+                    // Robust parser is TODO
+                    const lines = value.split('\n');
+                    for (const line of lines) {
+                        if (line.trim().startsWith("ECG,")) {
+                            parseLine(line.trim());
+                        }
+                    }
+                }
+            }
+        }
+
+        function parseLine(line) {
+            // ECG,tau,adc,cymatics
+            const parts = line.split(',');
+            if (parts.length >= 3) {
+                tauVal = parseFloat(parts[1]);
+                ecgVal = parseInt(parts[2]);
+                updateTaluDisplay();
+            }
+        }
+
+        // --- EVENTS --------------------------------------------------
+        document.getElementById('btn-connect').addEventListener('click', () => {
+             if (isDemo) {
+                 isDemo = false;
+                 moment = 0;
+             }
+             connectSerial();
+        });
+
+        document.getElementById('btn-demo').addEventListener('click', () => {
+            isDemo = !isDemo;
+            document.getElementById('val-status').innerText = isDemo ? "DEMO MODE" : "DISCONNECTED";
+            document.getElementById('val-status').style.color = isDemo ? "#ffff00" : "#ff0000";
+        });
+
+        // Start
+        loop();
+
+    </script>
+</body>
+</html>

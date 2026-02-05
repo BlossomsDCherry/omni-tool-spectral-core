@@ -1,0 +1,25 @@
+/*
+ * Overlay for Arduino Uno R4 WiFi (Uno Q)
+ * Maps the application's expected RGB LEDs to Arduino headers.
+ * This allows the code to build even if actual LEDs aren't connected yet.
+ */
+
+/ {
+	leds_app {
+		compatible = "gpio-leds";
+		
+		/* Mapping to Pins D6, D7, D8 for RGB */
+		led3_red: led_3_red {
+			gpios = <&arduino_header 6 GPIO_ACTIVE_HIGH>;
+			label = "Spectral Red";
+		};
+		led3_green: led_3_green {
+			gpios = <&arduino_header 7 GPIO_ACTIVE_HIGH>;
+			label = "Spectral Green";
+		};
+		led3_blue: led_3_blue {
+			gpios = <&arduino_header 8 GPIO_ACTIVE_HIGH>;
+			label = "Spectral Blue";
+		};
+	};
+};
