@@ -1,0 +1,10 @@
+[package]
+name = "ripple_tank_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+crossbeam = "0.8"
+ctrlc = "3.2"
+memmap2 = "0.5"
+rand = "0.8"
