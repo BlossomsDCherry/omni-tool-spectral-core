@@ -67,22 +67,49 @@ impl ZRailgun {
         }
     }
 
+    /// Reads the current Wave Coherence from the Ripple Tank.
+    fn get_coherence(&self) -> f64 {
+        let shm_path = "/dev/shm/current_wave_coherence";
+        if std::path::Path::new(shm_path).exists() {
+            if let Ok(contents) = std::fs::read_to_string(shm_path) {
+                if let Ok(val) = contents.trim().parse::<f64>() {
+                    return val;
+                }
+            }
+        }
+        0.0 // Default to zero if reading fails
+    }
+
     /// "Railguns" a byte buffer: Applies controlled entropy guided by Talu64 structure.
     fn fire(&mut self, data: &mut Vec<u8>) {
         let mut rng = StdRng::seed_from_u64(self.entropy_seed);
+        let coherence = self.get_coherence();
 
-        // 1. Bit Flip (Raw Entropy)
-        let turbulence = rng.gen_range(1..10); // Number of mutations
-        for _ in 0..turbulence {
-            let idx = rng.gen_range(0..data.len());
-            // Modulo 2 flip (XOR)
-            data[idx] ^= 1 << rng.gen_range(0..8);
+        println!("   >> Wave Coherence: {:.4}", coherence);
+
+        if coherence > 1.0 {
+            // HIGH COHERENCE: RAILS ENERGIZED
+            // Talu64 Structural Fold is ENABLED.
+            // We use the matrix to "guide" the mutations (simulated here by lower turbulence but higher impact)
+            println!("   ⚡ RAILS ENERGIZED. Applying Talu64 Fold.");
+
+            // In a real implementation, this would be: data = talu64_matrix . data
+            // Here, we simulate "Precision" by flipping fewer bits but specific ones.
+            let turbulence = 1;
+            for _ in 0..turbulence {
+                let idx = rng.gen_range(0..data.len());
+                data[idx] ^= 1 << rng.gen_range(0..8);
+            }
+        } else {
+            // LOW COHERENCE: RAILS DORMANT
+            // Raw Entropy / Chaos
+            println!("   ❄️  RAILS DORMANT. Low Coherence. Applying Raw Turbulence.");
+            let turbulence = rng.gen_range(5..15); // High chaos
+            for _ in 0..turbulence {
+                let idx = rng.gen_range(0..data.len());
+                data[idx] ^= 1 << rng.gen_range(0..8);
+            }
         }
-
-        // 2. Talu64 Structural Fold (Symbolic Placeholder)
-        // In full implementation, we would map data chunks to 4x4 matrices
-        // and multiply by the AlphaTensor factorization to find "faster" (lower energy) paths.
-        println!("   >> Talu64 Fold applied to {} bytes.", data.len());
     }
 }
 
