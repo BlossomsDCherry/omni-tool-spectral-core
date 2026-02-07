@@ -1,0 +1,23 @@
+[package]
+name = "d16_sdk_core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "d16_sdk"
+
+[dependencies]
+uniffi = { version = "0.25", features = ["cli"] }
+thiserror = "1.0"
+# We will path-link to z_rr if possible, or refactor logic here
+z_rr = { path = "../../z_rr" } 
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/uniffi-bindgen.rs"
+
+[build-dependencies]
+uniffi = { version = "0.25", features = ["build"] }

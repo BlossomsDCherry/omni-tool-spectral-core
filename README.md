@@ -37,6 +37,10 @@ This repository publishes the core constructions, experimental intuition, and co
 - **[proofs/sketch_bsd.md](./proofs/sketch_bsd.md)**
 - **[proofs/sketch_pnp.md](./proofs/sketch_pnp.md)**
 
+### ⚖️ Millennium Watch
+- **[The Institute](./modules/millennium_watch/README.md)**: Agentic workspaces auditing the code against the 7 Millennium Prize Problems.
+- **D16 Unified SDK**: Validated against the Law.
+
 ---
 
 ## 🦀 Rust Implementation

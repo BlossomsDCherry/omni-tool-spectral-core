@@ -1,21 +1,56 @@
+
+# Rust
 target/
+**/*.rs.bk
+**/*.bak
+Cargo.lock
+
+# Build Artifacts
 build/
 build_*/
-**/*.rs.bk
 *.bin
 *.elf
 *.hex
 *.map
-*.log
-node_modules/
+*.o
+*.so
+*.a
+*.tar.gz
+*.zip
+*.uf2
+
+# Python
 .venv/
+venv/
 __pycache__/
 *.pyc
+*.egg-info/
+
+# Node
+node_modules/
+
+# IDE / temp
 .gemini/
 .antigravity/
-laboratory_archive_*.tar.gz
-modules/ms_antigravity_heartbeat/target
-modules/z_rr/target
-modules/crew_core/target
-**/build.release/
-**/*.log
+.vscode/
+.idea/
+*.swp
+*~
+dummy.txt
+
+# Logs
+*.log
+flash.log
+flash_v2.log
+
+# Mirrored / Large Data
+workspaces/d8_franky/amazon_lily/
+modules/project_orca/src/orca/
+modules/hailo_d16_shim/d16_feeder
+modules/d16_kernel_recovered/d16_runner/d16_verifier
+test_hailo_shim
+
+# Specific Generated
+d16_sdk_deploy.tar.gz
+install_engine.sh
+setup_identity.sh

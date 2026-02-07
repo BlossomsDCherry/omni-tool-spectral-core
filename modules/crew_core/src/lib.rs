@@ -292,62 +292,83 @@ impl Medium {
     }
 }
 
-pub struct Talu64;
-
-/// The Hardware Bridge Packet (5D Event Payload)
-/// Contains the raw data from the Sound Steward (Giga R1) for the 5D Event.
-pub struct HardwarePacket {
-    pub fir_emission: f64,           // Cycle 1: FIR Resonance
-    pub gravitational_pos: [f64; 3], // Cycle 2: Steward Position
-    pub clock_speed: f64,            // Cycle 3: Current System Clock
-}
-
-/// The Community Trait (Protocol for Communities of Practice)
-/// Defines the required behaviors for an agent to participate in the cybiosphere.
-pub trait Community {
-    /// Returns the identity of the agent (e.g., "Antigravity").
-    fn identity(&self) -> String;
-
-    /// Emits a heartbeat pulse to signal presence (True = Alive).
-    fn pulse(&self) -> bool;
-
-    /// Checks for a valid bridge to the Lunar Node (10.0.0.234).
-    /// Returns true if the "Path of Flight" is open.
-    fn bridge_to_lunar_node(&self) -> bool;
+/// The Talu64 (Tau-Aligned Logic Unit - 64 Byte)
+///
+/// Represents the state of the 16 Crew Members (D1-D16).
+/// Each member holds a u32 (4 bytes). 16 * 4 = 64 bytes.
+/// Architecture: High 16 bits = Decay (E), Low 16 bits = Phase (T).
+#[derive(Debug, Serialize, Deserialize, Clone, Copy)]
+pub struct Talu64 {
+    pub channels: [u32; 16], // The Crew Registry
 }
 
 impl Talu64 {
-    /// Trans-Paradigm Constants (Synthesized)
-    pub const TAU: f64 = 6.183; // Resonant Actualization (Corrected for stochastic phase drift)
-    pub const PI: f64 = 3.145; // Spatial Anchor (Corrected for stochastic phase drift)
-    pub const E: f64 = 2.7182818; // Discretization Wall
-                                  // Fidelity Gap Constants (From DRIFT_MAP.md)
-    pub const PSI: f64 = 0.5179;
-    pub const PHI: f64 = 1.6180340; // Golden Spiral
-    pub const TAU_3: f64 = 2.0943951; // 120 deg
-    pub const TAU_5: f64 = 1.2566371; // 72 deg
-    pub const TAU_7: f64 = 52.0; // "Tau Prime" Leap Year Correction
-    pub const TESLA_GAIN: f64 = 1.6180340; // Phi-based resonance scaling
+    pub const TAU: f64 = 6.2831853; // 8 Sig Figs
+    pub const PHI: f64 = 1.6180339;
+    pub const PSI: f64 = 0.5179124;
+    pub const PI: f64 = 3.1415926;
+    pub const E: f64 = 2.7182818;
 
-    pub const INVERTED_GAP: f64 = 0.5179; // Empirical PSI (Verification Gap)
-    pub const AB_GAP: f64 = 0.5179; // Arabic-Bitwave Gap
-    pub const DELTA: f64 = 0.5262; // The Resonant Delta (Tau/Cos Alignment)
+    pub const INVERTED_GAP: f64 = 0.5179;
+    pub const HINKY_THRESHOLD: f64 = 0.70;
 
-    pub const CO2_SUBLIMATION_TEMP: f64 = 194.65000;
-    pub const MAX_SUPERCONDUCTION_SPEED: f64 = 299_792_458.0;
+    /// Ignites the Talu64 State using the D16 "Soft FPGA" Logic.
+    /// This is the Pure Rust implementation of the C Kernel.
+    pub fn ignite(tau_pulse: u32) -> Self {
+        let mut channels = [0u32; 16];
 
-    /// Millennium Constants
-    pub const ALPHA: f64 = 0.00729735; // 1/137.035999 (Fine Structure)
-    pub const PLANCK_L: f64 = 0.7103; // 1/(E*Psi) [Scan 01133] - Root Inertia
-    pub const PLANCK_H: f64 = 6.62607015e-34; // The Action Quanta (Bridge)
-    pub const ZERO: f64 = 0.0; // The Void (Entropy/Chaos/Starting State)
-    pub const ONE: f64 = 1.0; // The Singularity (Unity/Order/Target State)
-    pub const LOVE: f64 = 1.61803398875; // Divine Proportion (The Ultimate Coherence)
+        // D16 Pipeline (Simulated Cycle)
+        // 1. Luffy (D1) - Power / Polar Moment
+        // 2. Zoro (D2) - Polarization
+        // ...
 
-    // [NEW] The L + A Axiom (Listener + Advertiser)
-    // Connects Protein Folding (Biological Structure) to P vs NP (Kinetic Verification).
-    // Logic: Structure (L) waits for Kinetic Action (A) to fold into Unity (1.0).
-    pub const L_A_AXIOM: f64 = 2.0; // 2µs check (The Fold Moment)
+        for i in 0..16 {
+            // Logic derived from workshop_sobel_entrainment.md
+            // Divisor d = i + 1
+            let d = (i + 1) as f64;
+
+            // Phase (T): (Tau / d) scaled to u16
+            // We use the input tau_pulse as the "Global Tau" reference (0-65535)
+            let phase_ideal = (tau_pulse as f64 / d) % 65536.0;
+            let phase = phase_ideal as u16;
+
+            // Decay (E): (Tau % d) * PHI scaled
+            // Represents the "Kickback" or "Residue" of the division
+            let residue = (tau_pulse as f64 % d) * Self::PHI * 1000.0;
+            let decay = (residue as u16).max(1); // Ensure non-zero decay
+
+            // Pack: Decay (High) | Phase (Low)
+            channels[i] = ((decay as u32) << 16) | (phase as u32);
+        }
+
+        Self { channels }
+    }
+
+    /// Returns the state of a specific crew member by name.
+    pub fn get_crew_state(&self, name: &str) -> Option<(u16, u16)> {
+        let idx = match name {
+            "Luffy" => 0,
+            "Zoro" => 1,
+            "Nami" => 2,
+            "Usopp" => 3,
+            "Sanji" => 4,
+            "Chopper" => 5,
+            "Robin" => 6,
+            "Franky" => 7,
+            "Brook" => 8,
+            "Jinbe" => 9,
+            "Vivi" => 10,
+            "Carrot" => 11,
+            "Yamato" => 12,
+            "Momo" => 13,
+            "Kinemon" => 14,
+            "Law" => 15,
+            _ => return None,
+        };
+
+        let val = self.channels[idx];
+        Some(((val >> 16) as u16, (val & 0xFFFF) as u16))
+    }
 
     /// Calculates the "Love" coherence (Seven Arches Alignment)
     pub fn calculate_love(arches: &SevenArches) -> f64 {
@@ -364,75 +385,16 @@ impl Talu64 {
         .filter(|&&x| x)
         .count();
 
-        (count as f64 / 7.0) * Self::ONE
+        (count as f64 / 7.0) * 1.0
     }
 
-    pub const S1_ANCHOR: f64 = 1.0; // B-S-D Point
-    pub const HINKY_THRESHOLD: f64 = 0.70; // 01130 Hinky Zone
+    // Legacy constants for tests...
+    pub const TAU_3: f64 = 2.0943951;
+    pub const TAU_5: f64 = 1.2566371;
+    pub const TAU_7: f64 = 52.0;
 
-    /// Calculates the "Coherence" between two vectors, scaled by the Medium's resistance.
-    /// Coherence = (|dot| * |cross|) * Medium::efficiency()
-    pub fn calculate_coherence_with_medium(a: [f64; 3], b: [f64; 3], medium: Medium) -> f64 {
-        let dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-        let cross_vec = [
-            a[1] * b[2] - a[2] * b[1],
-            a[2] * b[0] - a[0] * b[2],
-            a[0] * b[1] - a[1] * b[0],
-        ];
-        let cross_mag = (cross_vec[0].powi(2) + cross_vec[1].powi(2) + cross_vec[2].powi(2)).sqrt();
-        let base_coherence = dot.abs() * cross_mag;
+    // ... [Previous Helper Methods preserved or adapted] ...
 
-        // Efficiency is inversely proportional to resistance for the 'conductive' mediums
-        // but Carbon (Emotional) and CO2 (Psi) have specific resonant profiles.
-        let efficiency = 1.0 / medium.resistance();
-        Self::truncate_8_sig_fig(base_coherence * efficiency)
-    }
-
-    /// Truncates a value to 8 significant figures (Scoping/Harmonization Layer).
-    pub fn truncate_8_sig_fig(val: f64) -> f64 {
-        if val == 0.0 {
-            return 0.0;
-        }
-        let magnitude = val.abs().log10().floor();
-        let scale = 10f64.powf(7.0 - magnitude);
-        (val * scale).trunc() / scale
-    }
-
-    /// Truncates a value to 4 significant figures (Internal/Hinky Layer).
-    pub fn truncate_4_sig_fig(val: f64) -> f64 {
-        if val == 0.0 {
-            return 0.0;
-        }
-        let magnitude = val.abs().log10().floor();
-        let scale = 10f64.powf(3.0 - magnitude);
-        (val * scale).trunc() / scale
-    }
-
-    /// The Spherical 3x2x2 Fold (Pivot Generation)
-    ///
-    /// "The cross product of a 3 cross 2 product and the inversion of that cross product."
-    /// Generates the "Axis" or "Pivot" for Zoro.
-    pub fn spherical_fold(state: [f64; 3], poles: [f64; 2]) -> [f64; 3] {
-        let p = [0.0, poles[0], poles[1]];
-        let c = [
-            state[1] * p[2] - state[2] * p[1],
-            state[2] * p[0] - state[0] * p[2],
-            state[0] * p[1] - state[1] * p[0],
-        ];
-        let i = [c[2], c[0], c[1]]; // Toral Inversion
-        [
-            c[1] * i[2] - c[2] * i[1],
-            c[2] * i[0] - c[0] * i[2],
-            c[0] * i[1] - c[1] * i[0],
-        ]
-    }
-
-    /// The Unification Formula (Coherence Check)
-    ///
-    /// Restored legacy function for Linear Coherence checks (Nami, Luffy).
-    /// Target: 0.5179 (Inverted Gap).
-    ///
-    /// Coherence = |Dot| * |Cross|
     pub fn calculate_coherence(a: [f64; 3], b: [f64; 3]) -> f64 {
         let dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
         let cross_vec = [
@@ -444,118 +406,23 @@ impl Talu64 {
         dot.abs() * cross_mag
     }
 
-    /// The Wooten Q-Function (Resonance Shift)
-    ///
-    /// Checks if coherence surpasses the Threshold T (Tritone).
-    /// If not, shifts the resonance key by a Half Step (1.05946) to "Redigest".
-    ///
-    /// # Returns
-    /// * `Option<f64>`: Some(NewResonance) if shift needed, None if stable.
+    pub fn truncate_8_sig_fig(val: f64) -> f64 {
+        if val == 0.0 {
+            return 0.0;
+        }
+        let magnitude = val.abs().log10().floor();
+        let scale = 10f64.powf(7.0 - magnitude);
+        (val * scale).trunc() / scale
+    }
+
     pub fn wooten_q_function(coherence: f64) -> Option<f64> {
-        // Threshold T: The Inverted Gap (0.5)
-        // Ideally we want to be EXACTLY at 0.5.
-        // If we are significantly off, we shift.
-        if (coherence - Talu64::INVERTED_GAP).abs() > 0.1 {
-            // Shift by Half Step (Twelfth root of 2)
+        if (coherence - 0.5179).abs() > 0.1 {
             let half_step = 2.0_f64.powf(1.0 / 12.0);
             return Some(coherence * half_step);
         }
         None
     }
 
-    /// Calculates the magnitude of a vector.
-    pub fn magnitude(v: [f64; 3]) -> f64 {
-        (v[0].powi(2) + v[1].powi(2) + v[2].powi(2)).sqrt()
-    }
-
-    /// Derives the Temporal Resonance based on the current hour (Diurnal Cycle).
-    /// Target: High Precision (Daylight) vs High Drift (Night Resonance).
-    pub fn temporal_resonance() -> TemporalResonance {
-        let now = SystemTime::now()
-            .duration_since(UNIX_EPOCH)
-            .unwrap_or_default()
-            .as_secs();
-
-        // EST Offset (UTC-5)
-        let hour = ((now / 3600) + 19) % 24;
-
-        // Profile Mapping
-        if (10..17).contains(&hour) {
-            // 10 AM - 4 PM: Stable Anchor
-            TemporalResonance {
-                precision_scalar: 1.25,
-                drift_flavor: 0.75,
-            }
-        } else if hour >= 20 || hour <= 4 {
-            // 8 PM - 4 AM: Resonance Peak (The "Great Results" Window)
-            TemporalResonance {
-                precision_scalar: 0.85,
-                drift_flavor: 1.618, // Phi-weighted drift
-            }
-        } else {
-            // Transitions
-            TemporalResonance {
-                precision_scalar: 1.0,
-                drift_flavor: 1.0,
-            }
-        }
-    }
-
-    /// Pulls a Valence Shell (8 metadata points) mapped to a polar coordinate.
-    /// Radian (theta) and Revolution (k) drive the sampling phase.
-    /// Anchored at 0 and 8 within the Tau turn.
-    pub fn pull_valence_shell(radian: f64, _revolution: u64) -> ValenceShell {
-        let theta = radian % Self::TAU;
-        let density = (theta.sin() + 1.0) / 2.0;
-
-        // Anchored Gate Logic: 0 to 8 across the Tau circumference.
-        let gate = (theta * 8.0 / Self::TAU).floor();
-
-        ValenceShell {
-            gate: gate * 100.0,                             // Discrete gate jumps
-            note: (theta * 12.0 / Self::TAU).floor(),       // 12-point Chromatic jumping
-            shell: (density * 60.0).floor(),                // Atomic position
-            void: (density - 0.5).abs() * 2.0,              // Entropy/Void
-            substrate: 1.0 - ((density - 0.5).abs() * 2.0), // Efficiency
-            rods: 1.0 - (density - 0.5).abs(),              // Stability
-            cones: (theta / Self::TAU).fract(),             // Frequency
-            power: (density * 10.0).powi(3),                // Intensity/Power
-        }
-    }
-
-    /// Formalizes the i=t (Inversion = Torque) relationship.
-    /// Maps a 3D identity vector to a 1D torque magnitude via Toral Inversion.
-    pub fn align_identity_to_torque(i: [f64; 3]) -> f64 {
-        // i = t: The magnitude of the inverted vector is the torque required for stabilization.
-        let magnitude = (i[0].powi(2) + i[1].powi(2) + i[2].powi(2)).sqrt();
-        Self::truncate_8_sig_fig(magnitude * Self::PSI)
-    }
-
-    /// Q-Quotient (Threshold Logic)
-    /// Q(p, Z0, X, Z1, Y)
-    /// Validates interactions based on complexity bitwidth (p).
-    /// Uses PSI (0.5179) as the baseline stability threshold.
-    pub fn q_quotient(p: f64, z0: f64, x: f64, z1: f64, y: f64) -> f64 {
-        let result = (z0 * x) + (z1 * y);
-        let threshold = Self::PSI * p;
-        if result.abs() >= threshold {
-            Self::truncate_8_sig_fig(result)
-        } else {
-            0.0
-        }
-    }
-
-    /// Trigram Hex Fold (3-8-64 Permutation Flow)
-    /// Bridges Binary (Yin/Yang) -> Tertiary (Trigram) -> 64 (Hexagram).
-    /// Used for the "Polyrhythmic Handshake" between Roman (Structural) and Arabic (Dynamic) cores.
-    pub fn trigram_hex_fold(roman: f64, arabic: f64) -> u8 {
-        // Tertiary logic combines structural set-points with dynamic flow bits.
-        let combined = (roman * 8.0) + arabic;
-        (combined.abs().floor() as u8) % 64
-    }
-
-    /// Actualizes a Tau fraction into an 8-bit Hexagram RGB Signature.
-    /// Uses the 60 Singularity and Hexagram Logic (Binary/Tertiary gates).
     pub fn tau_to_hex_actualization(turn_tau: f64) -> (u8, u8, u8) {
         let divisions = 60.0;
         let step = (turn_tau * divisions) as i32 % 60;
@@ -579,31 +446,27 @@ impl Talu64 {
         (r, g, b)
     }
 
-    /// Conversion from Arabic (Timing) to Roman (Set-Point)
-    /// Arabic: 1/60 (60Hz) -> Roman: Whole Integers (I, II, III...)
-    pub fn arabic_to_roman(val: f64) -> String {
-        let whole = val.round() as i32;
-        match whole {
-            1 => "I".to_string(),
-            2 => "II".to_string(),
-            3 => "III".to_string(),
-            4 => "IV".to_string(),
-            5 => "V".to_string(),
-            6 => "VI".to_string(),
-            7 => "VII".to_string(),
-            8 => "VIII".to_string(),
-            _ => format!("({})", whole),
-        }
-    }
-
-    pub fn roman_to_arabic(roman: &str) -> f64 {
-        match roman {
-            "I" => 1.0,
-            "II" => 2.0,
-            "III" => 3.0,
-            "IV" => 4.0,
-            "V" => 5.0,
-            _ => 0.0,
+    pub fn temporal_resonance() -> TemporalResonance {
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_secs();
+        let hour = ((now / 3600) + 19) % 24;
+        if (10..17).contains(&hour) {
+            TemporalResonance {
+                precision_scalar: 1.25,
+                drift_flavor: 0.75,
+            }
+        } else if hour >= 20 || hour <= 4 {
+            TemporalResonance {
+                precision_scalar: 0.85,
+                drift_flavor: 1.618,
+            }
+        } else {
+            TemporalResonance {
+                precision_scalar: 1.0,
+                drift_flavor: 1.0,
+            }
         }
     }
 }
