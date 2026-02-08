@@ -8,6 +8,7 @@ license = "Apache-2.0"
 repository = "https://github.com/pecosdwilly/omni-tool-spectral-core"
 
 [dependencies]
+libc = "0.2.180"
 # To be added as needed
 
 [dev-dependencies]

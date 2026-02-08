@@ -7,6 +7,7 @@ use std::io::Write;
 use zip::ZipArchive;
 
 use crate::shm_writer::D16ShmWriter;
+use rp1_rio::Rp1Rio;
 
 /// The Talu64 (Tau-Aligned Logic Unity - 64 Byte)
 #[derive(Debug, Clone, Copy)]
@@ -78,6 +79,7 @@ pub struct ZRailgun {
     pub entropy_seed: u64,
     drift_accumulator: f64,
     shm: Option<D16ShmWriter>,
+    rio: Option<Rp1Rio>,
 }
 
 extern "C" {
@@ -118,11 +120,35 @@ impl ZRailgun {
             );
         }
 
+        // Initialize RP1 RIO (Sovereign Access Check)
+        let mut rio = None;
+        match Rp1Rio::new() {
+            Ok(driver) => {
+                println!("   ⚡ RP1 RIO: Sovereign Access Granted. RAILS ARMED (GPIO 17-27).");
+                rio = Some(driver);
+            }
+            Err(e) => {
+                println!(
+                    "   ⚠️  RP1 RIO: Access Denied ({}). Running in Simulation Mode.",
+                    e
+                );
+            }
+        }
+
+        // Initialize output pins if armed
+        if let Some(r) = &mut rio {
+            // Enable output for pins 17..=27
+            for pin in 17..=27 {
+                r.enable_output(pin);
+            }
+        }
+
         Self {
             talu64,
             entropy_seed: seed,
             drift_accumulator: 0.0,
             shm: D16ShmWriter::new(),
+            rio,
         }
     }
 
@@ -148,6 +174,9 @@ impl ZRailgun {
 
         if coherence > 1.0 {
             println!("   ⚡ RAILS ENERGIZED. Applying Crew Logic Pipeline.");
+
+            // Update Physical Rainbow (UV Layer)
+            self.update_rainbow_output(coherence);
 
             // 2. Zoro (D2): Polarization (Bit Flip at PHI boundaries)
             if let Some((decay, phase)) = self.talu64.get_crew_state("Zoro") {
@@ -264,6 +293,13 @@ impl ZRailgun {
             // LOW COHERENCE: RAILS DORMANT
             println!("   ❄️  RAILS DORMANT. Low Coherence. Applying Raw Turbulence.");
 
+            // Clear Rainbow
+            if let Some(rio) = &mut self.rio {
+                for pin in 17..=27 {
+                    rio.clr_pin(pin);
+                }
+            }
+
             if !data.is_empty() {
                 let turbulence = rng.gen_range(5..15);
                 for _ in 0..turbulence {
@@ -279,6 +315,62 @@ impl ZRailgun {
         // Broadcast State to Cybiosphere (Shared Mem)
         if let Some(shm) = self.shm.as_mut() {
             shm.write(self.talu64.channels, self.entropy_seed as u32);
+        }
+    }
+
+    /// Maps Coherence & Spectral Density to Physical Pins (Rainbow Railgun Output)
+    /// GPIO 17 (UV) -> GPIO 27 (Red)
+    fn update_rainbow_output(&mut self, coherence: f64) {
+        if let Some(rio) = &mut self.rio {
+            // Map 11 pins (17..27) representing the spectrum.
+            // Pin 17 = Highest Frequency (UV)
+            // Pin 27 = Lowest Frequency (Red)
+
+            // We use 'coherence' as magnitude and 'zoro phase' as modulation
+            let modulation = if let Some((_, phase)) = self.talu64.get_crew_state("Zoro") {
+                phase as f64
+            } else {
+                1.0
+            };
+
+            // Calculate active 'bar' height based on Coherence (1.0 to 10.0 scale?)
+            let limit = (coherence * 2.0).clamp(0.0, 11.0) as usize;
+
+            for i in 0..11 {
+                let pin = 17 + i as u32; // 17..=27
+                                         // Reverse Mapping: i=0 is UV (Pin 17), i=10 is Red (Pin 27)
+                                         // If coherence is high, we light up from Red towards UV?
+                                         // OR: Diffraction pattern?
+
+                // Active if index within limit?
+                // Let's model it as a VU Meter for now, filling from Red (27) to UV (17) would be typical energy build up.
+                // BUT User asked for: "expanded diffusion ... reverse order (GPIO 17 greatest, GPIO 27 least)"
+
+                // Let's interpret: 17 is the PEAK (Greatest), 27 is the BASE (Least).
+                // So clear all, set bit logic based on spectral density.
+
+                // Simple Logic:
+                // If Coherence > Threshold(i), fire Pin(i).
+                // Threshold decreases from 17 to 27? Or increases?
+                // Higher coherence = Higher Frequency access.
+
+                // Energy Level i (0..11):
+                // 0 (Pin 17 - UV) requires MOST coherence.
+                // 10 (Pin 27 - Red) requires LEAST coherence.
+
+                let threshold = (11.0 - i as f64) * 0.5; // Pin 17 needs 5.5, Pin 27 needs 0.5
+
+                if coherence > threshold {
+                    // Modulate with phase for "Shimmer"
+                    if (modulation as usize + i) % 2 == 0 {
+                        rio.set_pin(pin);
+                    } else {
+                        rio.clr_pin(pin);
+                    }
+                } else {
+                    rio.clr_pin(pin);
+                }
+            }
         }
     }
 
