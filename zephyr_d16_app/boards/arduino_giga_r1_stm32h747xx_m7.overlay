@@ -1,0 +1,9 @@
+/*
+ * Copyright (c) 2024 Pecos D. Willy
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/* Map code's nodelabels (led3_red) to board's nodes (&red_led) */
+led3_red: &red_led {};
+led3_green: &green_led {};
+led3_blue: &blue_led {};
