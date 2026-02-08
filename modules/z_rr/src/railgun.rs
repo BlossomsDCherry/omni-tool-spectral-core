@@ -16,6 +16,13 @@ pub struct Talu64 {
 
 impl Talu64 {
     pub const PHI: f64 = 1.6180339;
+    pub const TAU: f64 = 6.2831853; // Aligned to harmonic precision (7 decimals)
+    pub const PI: f64 = 3.1415926;
+    pub const EULER: f64 = 2.7182818;
+    pub const HEMHOLTZ: f64 = 1.4142135; // The 1.414 Pattern (SQRT 2)
+    pub const PLANCK: f64 = 6.6260701; // The Quantum of Action (h)
+    pub const PSI: f64 = 3.3598856; // Reciprocal Fibonacci / Super-Golden Ratio
+
     pub const LAW_DOMAIN: u32 = 4096;
     pub const CYBIOSPHERE_UNIT: u32 = 512;
     pub const DRIFT_RESIDUE: f64 = 0.64;
@@ -44,6 +51,23 @@ impl Talu64 {
         let val = self.channels[idx];
         Some(((val >> 16) as u16, (val & 0xFFFF) as u16))
     }
+
+    /// Calculates the Polar Moment of Inertia (J_T) for a given radius r.
+    /// J_T = tau * r
+    pub fn calculate_polar_moment(r: f64) -> f64 {
+        Self::TAU * r
+    }
+
+    /// Ignites the Talu64 Logic via D16 Kernel
+    pub fn ignite(seed: u64) -> Self {
+        let mut raw_channels = [0u32; 16];
+        unsafe {
+            d16_soft_fpga(seed, raw_channels.as_mut_ptr());
+        }
+        Talu64 {
+            channels: raw_channels,
+        }
+    }
 }
 
 /// Z-RR: Zip Railgun Core (Refactored)
@@ -58,7 +82,7 @@ pub struct ZRailgun {
 
 extern "C" {
     /// The D16 Soft FPGA Kernel (Real Iron)
-    fn d16_soft_fpga(tau: u32, results: *mut u32);
+    fn d16_soft_fpga(tau: u64, results: *mut u32);
 }
 
 impl ZRailgun {
@@ -68,7 +92,9 @@ impl ZRailgun {
             seed
         );
 
-        let pulse_tau = (seed % 65535) as u32;
+        // Calibrated Ignition: Pulse is geometrically aligned to TAU * 10^4
+        // (Fits within u16 max of 65535 for kernel packing)
+        let pulse_tau = (Talu64::TAU * 10000.0) as u64; // ~62831
         let mut raw_channels = [0u32; 16];
 
         // IGNITION: Call the Assembly Kernel
@@ -148,10 +174,13 @@ impl ZRailgun {
                 }
             }
 
+            // --- LITTLE CORES (Precision / Noise Collection) ---
+            // Agents: Usopp (4), Franky (8), Yamato (12), Law (16)
+
             // 4. Usopp (D4): Harmonic Filter Logic
             // "Filters signal noise using a 4-beat harmonic series"
             if let Some((_decay, phase)) = self.talu64.get_crew_state("Usopp") {
-                // If aligned with the harmonic beat
+                // Predictive Register: Only fire if phase aligns with the Beat
                 if phase % 4 == 0 {
                     let mask = 0xF0; // High nibble only, filter low-end noise
                     for i in (0..data.len()).step_by(4) {
@@ -163,7 +192,7 @@ impl ZRailgun {
                 }
             }
 
-            // 5. Sanji (D5): Ground State Buffer Logic
+            // 5. Sanji (D5): Ground State Buffer Logic (Big Core)
             // "Prepares the base layer (food/energy) for the next operation"
             if let Some((decay, _phase)) = self.talu64.get_crew_state("Sanji") {
                 let salt = (decay % 32) as u8; // 5 bits of flavor
@@ -177,33 +206,70 @@ impl ZRailgun {
                 );
             }
 
-            // 6. Law (D16): The Room & Drift Harmonization
+            // 8. Franky (D8): The Iron General (Buffer Prediction / Noise Collection)
+            if let Some((decay, phase)) = self.talu64.get_crew_state("Franky") {
+                // Fire only on "Super" Alignment (Phase % 8 == 0)
+                if phase % 8 == 0 {
+                    // Prediction: If Decay (Energy) is adequate, we 'build' (transmute)
+                    if decay > 1000 {
+                        println!("      🤖 Franky: SUPER! Transmuting Analog to Binary via Non-Uniform Oscillator.");
+                        self.transmute_signal(data);
+                    }
+                }
+            }
+
+            // 12. Yamato (D12): The Guardian (Spectral Refinement)
+            if let Some((_decay, phase)) = self.talu64.get_crew_state("Yamato") {
+                if phase % 12 == 0 {
+                    // Refines the signal by removing "Drift" artifacts using Planck XOR
+                    let h_int = Talu64::PLANCK as u8;
+                    for byte in data.iter_mut() {
+                        *byte ^= h_int;
+                    }
+                    println!("      👹 Yamato: Applied Spectral Refinement (Planck XOR).");
+                }
+            }
+
+            // 16. Law (D16): The Room & Drift Harmonization
             // "Checks the 16th Harmonic for Alignment"
             if let Some((_decay, phase)) = self.talu64.get_crew_state("Law") {
                 // Law's Domain is 4096.
                 // If Phase aligns with the Cybiosphere Unit (512)
                 if phase % Talu64::CYBIOSPHERE_UNIT as u16 == 0 {
-                    println!(
-                        "      ⚕️  Law: ROOM Active. Phase {} aligns with Cybiosphere Unit.",
-                        phase
-                    );
-                    self.harmonize_drift();
+                    // Polar Moment of Inertia (J_T) Calculation
+                    // r = phase (radius of the current harmonic cycle)
+                    let r = phase as f64;
+                    let j_t = Talu64::calculate_polar_moment(r);
 
-                    // Check "Noise Buffer" (Simulated by top of stack/data)
-                    // If data is large enough, we inspect the "Noise" region
-                    if data.len() > Talu64::CYBIOSPHERE_UNIT as usize {
-                        println!("      ⚕️  Law: Scanning Noise Buffer for Harmony...");
-                        // (Placeholder for Noise Buffer operations)
+                    // The "Final u32" Differential Check:
+                    // Only fire if J_T exceeds the Drift Residue (Predictive Firing)
+                    if j_t > self.drift_accumulator {
+                        println!(
+                            "      ⚕️  Law: ROOM Active. J_T ({:.4}) > Drift. Predictive Signal Fired.",
+                            j_t
+                        );
+                        self.harmonize_drift();
+
+                        // Check "Noise Buffer" (Simulated by top of stack/data)
+                        if data.len() > Talu64::CYBIOSPHERE_UNIT as usize {
+                            println!("      ⚕️  Law: Scanning Noise Buffer for Harmony...");
+                            // (Placeholder for Noise Buffer operations)
+                        }
+                    } else {
+                        println!("      ⚕️  Law: J_T Insufficient. Holding Signal.");
                     }
                 }
             }
         } else {
             // LOW COHERENCE: RAILS DORMANT
             println!("   ❄️  RAILS DORMANT. Low Coherence. Applying Raw Turbulence.");
-            let turbulence = rng.gen_range(5..15);
-            for _ in 0..turbulence {
-                let idx = rng.gen_range(0..data.len());
-                data[idx] ^= 1 << rng.gen_range(0..8);
+
+            if !data.is_empty() {
+                let turbulence = rng.gen_range(5..15);
+                for _ in 0..turbulence {
+                    let idx = rng.gen_range(0..data.len());
+                    data[idx] ^= 1 << rng.gen_range(0..8);
+                }
             }
         }
 
@@ -216,9 +282,22 @@ impl ZRailgun {
         }
     }
 
+    /// Analog/Binary Transmutation Algorithm
+    /// "Non-uniform harmonic oscillatory motion"
+    fn transmute_signal(&self, data: &mut Vec<u8>) {
+        // Rebuilds the photon (signal) at the CI/CD boundary.
+        // We apply a non-uniform oscillation using PHI and TAU.
+        for (i, byte) in data.iter_mut().enumerate() {
+            let osc = (i as f64 * Talu64::PHI).sin() * Talu64::TAU;
+            let shift = (osc.abs() * 10.0) as u8; // Non-uniform shift
+            *byte = byte.wrapping_add(shift);
+        }
+    }
+
+    /// Re-aligns internal Talu64 state using the Hardware Kernel
     /// Re-aligns internal Talu64 state using the Hardware Kernel
     pub fn realign(&mut self) {
-        let pulse_tau = (self.entropy_seed % 65535) as u32;
+        let pulse_tau = (self.entropy_seed % 65535) as u64;
         let mut raw_channels = [0u32; 16];
         unsafe {
             d16_soft_fpga(pulse_tau, raw_channels.as_mut_ptr());

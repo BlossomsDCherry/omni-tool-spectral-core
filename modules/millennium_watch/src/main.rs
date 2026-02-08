@@ -1,3 +1,10 @@
+mod agents;
+use agents::{
+    BSDAgent, HodgeAgent, MillenniumAgent, NavierStokesAgent, PoincareAgent, PvsNPAgent,
+    RiemannAgent, YangMillsAgent,
+};
+use z_rr::Talu64; // Import from dependency
+
 /// Voxel Synth: Dimensional Comet Toss Calculator
 /// "The Geometry of Resonance"
 
@@ -12,6 +19,30 @@ fn main() {
     // Check Topologies
     analyze_topology("The 120-Point Voxel", &harmonics, 512, 3); // Energy 3
     analyze_topology("The 60-Point Voxel", &harmonics, 512, 4); // Energy 4
+
+    // --- Millennium Watch Integration ---
+    println!("\n--- Millennium Watch: 7-Agent Scan ---");
+    let agents: Vec<Box<dyn MillenniumAgent>> = vec![
+        Box::new(PvsNPAgent),
+        Box::new(HodgeAgent),
+        Box::new(RiemannAgent),
+        Box::new(YangMillsAgent),
+        Box::new(NavierStokesAgent),
+        Box::new(BSDAgent),
+        Box::new(PoincareAgent),
+    ];
+
+    // Simulate a Talu64 Pulse (e.g. Seed 12345)
+    let talu = Talu64::ignite(12345);
+    println!("Scanning Talu64 State (Seed: 12345)...");
+
+    for agent in agents {
+        if let Some(insight) = agent.scan(&talu, 50.0) {
+            println!("   🚨 [{}]: {}", agent.name(), insight);
+        } else {
+            // println!("   . [{}]: No anomalies.", agent.name());
+        }
+    }
 }
 
 fn analyze_topology(name: &str, divisors: &[u32], domain: u32, threshold: usize) {
