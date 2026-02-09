@@ -1,0 +1,47 @@
+/*
+ * Copyright (c) 2024 Pecos D. Willy
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/ {
+	aliases {
+		/* Virtual Theremins on TX/RX Pairs */
+		theremin0 = &usart1;
+		theremin1 = &usart2;
+		theremin2 = &usart3; 
+		
+		/* Silicon Logic Display */
+		d16-monitor = &fdcan1;
+	};
+};
+
+/* Theremin 1 (Standard Serial) */
+&usart1 {
+	status = "okay";
+	pinctrl-0 = <&usart1_tx_pa9 &usart1_rx_pb7>;
+	pinctrl-names = "default";
+	current-speed = <115200>;
+};
+
+/* Theremin 2 (M4 Console/Serial1) */
+&usart2 {
+	status = "okay";
+	/* Usually defined in M4 DTS with PD5/PD6 */
+};
+
+/* Theremin 3 (Likely Serial2/3) */
+&usart3 {
+	status = "okay";
+	pinctrl-0 = <&usart3_tx_pd8 &usart3_rx_pd9>;
+	pinctrl-names = "default";
+	current-speed = <115200>;
+};
+
+/* CAN Logic Display (FDCAN1) */
+&fdcan1 {
+	status = "okay";
+	pinctrl-0 = <&fdcan1_rx_pb8 &fdcan1_tx_pb9>;
+	pinctrl-names = "default";
+	bus-speed = <1000000>;
+	bus-speed-data = <5000000>;
+};

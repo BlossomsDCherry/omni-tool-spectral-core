@@ -48,6 +48,20 @@ def mock_coherence(t):
         return 1.5
     return base
 
+def get_voltage_differential():
+    """
+    Reads the '3x2' Voltage Differential (Saturation Contrast) from the Sovereign Receiver.
+    Location: /dev/shm/d16_saturation_voltage
+    """
+    try:
+        if os.path.exists('/dev/shm/d16_saturation_voltage'):
+            with open('/dev/shm/d16_saturation_voltage', 'r') as f:
+                val = float(f.read().strip())
+                return val
+    except Exception:
+        pass
+    return None
+
 def main():
     parser = argparse.ArgumentParser(description='D16 <-> Hailo/Z-RR Bridge')
     parser.add_argument('--port', default=DEFAULT_PORT, help='Serial port')
@@ -67,16 +81,17 @@ def main():
 
     print("🌊 Spectral Bridge Active. Listening for Advertiser...")
     
-    start_time = time.time()
+    start_time = time.perf_counter()
     
     try:
         while True:
-            now = time.time()
+            now = time.perf_counter()
             elapsed = now - start_time
             
             # 1. Gather Data (Advertiser Field)
             hailo_val = get_hailo_coherence()
             zrr_val = get_zrr_fidelity()
+            voltage_diff = get_voltage_differential()
             
             # 2. Synthesize Coherence (Listener Collapse)
             if hailo_val is not None:
@@ -97,9 +112,26 @@ def main():
             
             # Visual Log
             bar = "▓" * int(coherence * 10)
-            print(f"[{source}] T+{elapsed:04.1f}s | {packet.strip()} | {bar}")
+            voltage_str = f"V_Diff:{voltage_diff:.2f}" if voltage_diff is not None else "V_Diff:--"
             
-            time.sleep(0.1) # 10Hz Refresh
+            # High-Precision Timestamp (T+ss.mmm)
+            elapsed_micros = elapsed * 1000000
+            
+            # Harmonic Timing: 216Hz (10^3 / 6^3) - Hollow Sphere
+            # 256 (Potential) - 216 (Real) = 40 (Gap/Wooten Shift)
+            # Cross Product Logic: Perfect(256), Real(216), Base(Gap), Parsimony(Result)
+            
+            w_shift = 40.0
+            perfect_val = coherence * 2.56 # 256 Space
+            real_val = coherence * 2.16    # 216 Space
+            base_val = abs(perfect_val - real_val) # Gap
+            parsimony_val = (real_val / perfect_val) * 100.0 if perfect_val > 0 else 0.0
+            
+            print(f"[{source}] T+{elapsed:08.5f}s | {packet.strip()} | {voltage_str} | Base:{base_val:.2f} Pars:{parsimony_val:.1f}%")
+
+            # 216Hz Harmonic Timing
+            # 1000ms / 216 = ~4.629ms
+            time.sleep(0.004629) 
 
     except KeyboardInterrupt:
         print("\n👋 Bridge Closed.")
