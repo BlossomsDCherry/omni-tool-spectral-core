@@ -6,7 +6,7 @@ RPi 5 (Build Host)
 ├── D16 Driver (16-Dimensional Deployment Controller)
 └── TPP Channel (Transport Protocol Proxy)
     ├─→ STM32U585 M33 (Real-Time Kernel, custom Zephyr fork)
-    ├─→ Dragonwing QRB2210 (Linux userspace, spectral compute)
+    ├─→ Spectral Compute (A76) (Linux userspace, spectral compute)
     └─→ Zephyr/Rust Bridge (Inter-core coherence)
 
 Target: Arduino UNO Q
@@ -14,17 +14,24 @@ Target: Arduino UNO Q
 ## Why This Matters
 
 1. **No vendor lock**: Your RPi 5 owns the entire build and deployment pipeline.
-2. **Sovereign Operator Model**: MsAntigravity acts as the Operator, wielding the core as a Prime Vector instrument.
-3. **PHITL Biorhythm Password**: Human-in-the-loop attestation via heart rate, phase, and electromagnetic signature (The Clocked Resistor).
-4. **Heterogeneous sovereignty**: Both RT + Linux rebuilt together, atomically.
+2. **Sovereign Operator Model**:    ├─→ Spectral Compute (A76) (Linux userspace, spectral compute)
+    │   ├── Rust "Crew" Logic (High-level reasoning, networking)
+    │   └── Python Adapter (Hailo-8 / NPU interface)
+    │
+    ├─→ M33 (Real-time Core, Zephyr)
+    │   ├── "Soul" of the machine (TrustZone, Identity)
+    │   └── "Conductor" (Synchronizes Time & Rhythm)
+    │
+    └─→ RP1 (Southbridge, "UV Layer")
+        └── "Hands" (GPIO, PIO, Atomic I/O)
 
-## Build Flow
+## Data Flow (The "Blood")
 
-1. RPi 5 pulls spectral config (phase, τ precision, 15-pass integration specs).
-2. D16 cross-compiles M33 kernel + Dragonwing userspace.
-3. TPP deploys both over a single secure channel to UNO Q.
-4. Zephyr/Rust bridge spins up both cores coherently.
-5. Feedback: M33 telemetry → Dragonwing → RPi 5 (closed loop).
+1. Information enters via peripherals (RP1) or Network (A76).
+2. D16 cross-compiles M33 kernel + Spectral Compute userspace.
+3. Rhythm: M33 dictates the 50ms "heartbeat".
+4. Action: M33 authorizes RP1 pin changes.
+5. Feedback: M33 telemetry → Spectral Compute → RPi 5 (closed loop).
 
 ## Strategic Implication
 

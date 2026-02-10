@@ -16,12 +16,43 @@ heterogeneous SoCs.
 - Binary/byte alignment
 
 **Layers 9–12 (Molecular)**: Coupled oscillator orchestration
-- Cross-core consensus (M33 ↔ Dragonwing)
+- Cross-core consensus (M33 ↔ Spectral Compute)
+- Cross-core consensus (M33 ↔ Spectral Compute)
 - State distribution
 
 **Layers 13–16 (Macroscopic)**: Hardware deployment
 - TPP transport, attestation, dual-slot images
 - Rollback safety
+
+- **M33**: Real-time core (Zephyr).
+- **Spectral Compute**: High-level core (Rust/Linux).
+- **RP1**: GPIO/PIO controller (UV Layer).
+
+## Responsibilities
+- Atomic boot (M33 first, then Spectral Compute).
+- Cross-core consensus (M33 ↔ Spectral Compute).
+- Thermal throttling (M33 dictates, Spectral Compute obeys).
+
+## Boot Sequence
+
+1. **Power On**: PMIC energizes rails.
+2. **Bootrom**: Loads `boot.bin` (M33).
+3. **M33 Init**:
+    - Verifies signature of `kernel.img` (Spectral Compute).
+    - Sets up shared memory.
+    - Releases A76 reset line.
+4. **Spectral Compute Init**:
+    - Linux kernel boots.
+    - Loads `d16_driver.ko`.
+    - Handshake with M33 (0x0000 Control Word).
+
+## Security Model (The "Soul")
+
+- **Trust Root**: M33 (TrustZone).
+- **Measurement**:
+    - M33 boots → measures Spectral Compute.
+    - Spectral Compute boots → measures M33.
+Both attest success to RPi 5
 
 ## 15-Pass Integration
 
@@ -34,13 +65,13 @@ committing to the next layer. This ensures stability and reversibility.
 RPi 5 (Authority)
 │
 ├─ [Layer 1-4] M33 image build + sign
-├─ [Layer 5-8] Dragonwing image build + sign
+├─ [Layer 5-8] Spectral Compute image build + sign
 ├─ [Layer 9-12] Cross-check consistency (both signed)
 ├─ [Layer 13-16] Deploy via TPP, verify on hardware
 │
 └─→ UNO Q (Attestor)
-M33 boots → measures Dragonwing
-Dragonwing boots → measures M33
+M33 boots → measures Spectral Compute
+Spectral Compute boots → measures M33
 Both attest success to RPi 5
 ```
 

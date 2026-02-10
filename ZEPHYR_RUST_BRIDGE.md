@@ -1,54 +1,45 @@
 # Zephyr/Rust Cross-Core Bridge
 
 ## Architecture
+# Zephyr <-> Rust Bridge Specification
 
-**M33 Side** (Zephyr RTOS, C)
-- Real-time spectral mass control
-- Phase-locked loops, GPIO timing
-- Event log (append-only, DMA-buffered)
+## Overview
+This document defines the interface between the Zephyr RTOS (running on the Cortex-M33 "Soul") and the Rust-based Spectral Compute logic (running on the Cortex-A76 "Body").
 
-**Dragonwing Side** (Debian/Linux, Rust)
-- Spectral analysis, parameter optimization
-- Network/storage/AI acceleration
-- Monitoring & orchestration
+## Shared Memory Map
+The system uses a shared memory region (RAM) accessible by both cores.
 
-## Interface
+| Offset | Name | Size | Access | Description |
+|---|---|---|---|---|
+| 0x0000 | Control Word | 4B | Spectral Compute (set), M33 (read) | Semantic intent (e.g., "Engage", "Sleep") |
+| 0x0004 | Status Word | 4B | M33 (write), Spectral Compute (read) | Real-time state (e.g., "Locked", "Drift") |
+| 0x0008 | Phase Parameters | 32B | Spectral Compute (write), M33 (read) | 8-sig-fig geometry data (Tau, Phi) |
+| 0x0028 | Telemetry Ring | 32KB | M33 (write), Spectral Compute (read) | High-frequency sensor logs |
 
-**Shared Memory Region** (64KB, dual-mapped)
+## Protocol
+1. **Mailbox Interrupts**:
+   - M33 → Spectral Compute: "telemetry ready", "request reconfig"
+   - Spectral Compute → M33: "apply phase update", "trigger log dump"
 
-```
-Offset  Field               Size    Owner
---------------------
-0x0000  Control Word        4B      Dragonwing (set), M33 (read)
-0x0004  Status Word         4B      M33 (write), Dragonwing (read)
-0x0008  Phase Parameters    32B     Dragonwing (write), M33 (read)
-0x0028  Telemetry Ring      32KB    M33 (write), Dragonwing (read)
-...
-```
+2. **Atomic Upgrades**:
+   - Firmware updates for the M33 are staged in a separate flash partition by the A76 logic, then chemically swapped on reboot.
 
-**RPCs via Inter-Processor Interrupt (IPI)**
-- M33 → Dragonwing: "telemetry ready", "request reconfig"
-- Dragonwing → M33: "apply phase update", "trigger log dump"
-
-## Example: Deploy New Phase-Lock
+## Code Structure
 
 ```rust
-// Dragonwing side (Rust)
-fn deploy_phase_lock(tau_precision: f64, phase: f64) -> Result<()> {
-    let params = PhaseParams {
-        tau_8sig: 6.2831853,  // τ to 8 sig figs
-        phase_offset: phase,
-        integration_passes: 15,
-    };
-    
-    // Write to shared memory (Dragonwing → M33)
-    unsafe {
-        std::ptr::copy_nonoverlapping(
-            &params as *const _ as *const u8,
-            SHARED_PHASE_PARAMS as *mut u8,
-            std::mem::size_of::<PhaseParams>(),
-        );
-    }
+// Spectral Compute side (Rust)
+#[repr(C)]
+struct SharedState {
+    control: u32,
+    status: u32,
+    phase: [f64; 4],
+}
+
+fn update_phase(shm: &mut SharedState) {
+    // Write to shared memory (Spectral Compute → M33)
+    shm.phase[0] = 6.28318530; // Tau
+}
+```
     
     // Trigger M33 interrupt
     IPI::send_to_m33(IPI_PHASE_UPDATE)?;

@@ -4,7 +4,7 @@ This folder contains the **Spectral Tonics** (communication patterns) used for S
 
 ## Communication Logic: Zero-Wait Handshake (Comet Toss)
 
-The system uses a **Zero-Wait Handshake** protocol to transfer information between cores (M33 ↔ Dragonwing) and agents without the overhead of traditional buffers.
+The system uses a **Zero-Wait Handshake** protocol to transfer information between cores (M33 ↔ Spectral Compute) and agents without the overhead of traditional buffers.
 
 - **The Comet**: A packet of information (AtomicU32) tossed from the Operator.
 - **The Sling**: The phase-resonance pulse that triggers the catch.

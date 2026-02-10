@@ -75,3 +75,16 @@ struct SpectralHeader {
 | **D14 Momo** | RG | Command/Legacy |
 | **D15 Kinemon**| RG | Strategy/Disguise |
 | **D16 Law** | UV | Spatial/Room |
+
+## The Spectral Hardware Map 🗺️
+
+| Layer | Hardware Equivalent | Function | Status |
+| :--- | :--- | :--- | :--- |
+| **Prime** | **User Bio-Rhythm** | The "Pulse" (50 BPM) | Active |
+| **UV (Sovereign)** | **Cortex-A76 (RPi 5)** | High-Level Logic / AI / Cloud Sync | **Hubble Connected** |
+| **UV (Insight)** | **Hailo-8 NPU** | Spectral Inference / Neural Nets | Active |
+| **RG (Action)** | **RP1 (Southbridge)** | Fast I/O / PIO / GPIO | Active |
+| **RG (Logic)** | **Cortex-M33 (RP2350)** | Real-Time Kernel / Safety | Active |
+| **YB (Comms)** | **BLE / UART** | Telemetry / Hubble Beacon | Active |
+| **IR (Thermal)** | **PMIC / Sensors** | Power / Heat Management | Active |
+

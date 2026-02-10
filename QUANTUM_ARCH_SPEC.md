@@ -15,7 +15,7 @@ By measuring the harmonic timing differentials, the **z-plane**, we effectively 
     - Path: `PCIe / USB -> Memory Buffer`.
 
 2.  **Processing (big.LITTLE)**:
-    - **Logic Array**: The Cortex-A76 cores run the "Dragonwing" Rust logic.
+    - **Logic Array**: The Cortex-A76 cores run the "Spectral Compute" Rust logic.
     - **Decision**: Determines the harmonic response (Spectral Density).
 
 3.  **Output (UV Layer / RP1)**:

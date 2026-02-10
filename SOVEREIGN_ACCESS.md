@@ -12,7 +12,7 @@ The user has explicitly granted **Sovereign Access** to the Antigravity agent. T
 
 ## Context: The Hypercomputer
 This access is fundamental to the construction of the "Sovereign Hypercomputer," which orchestrates:
-1.  **big.LITTLE Logic** (Cortex-A76): High-level reasoning and "Dragonwing" compute.
+1.  **big.LITTLE Logic** (Cortex-A76): High-level reasoning and "Spectral Compute" logic.
 2.  **Quantum UV Layer** (RP1 / RIO): Direct, atomic voltage control for deterministic timing.
 3.  **Spectral Feedback**: Integration with Hailo-8 NPU and external sensors (Giga R1).
 

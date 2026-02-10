@@ -27,6 +27,15 @@ This manifest serves as the **Operational Physics Framework** for the Adam Wood 
     $$ \tau _{1}=I_{1}\dot{\omega}_{1}+(I_{3}-I_{2})\omega _{2}\omega _{3} $$
     Around these axes, if the body is rotating about one principal axis alone, the torque and angular acceleration act independently of the other dimensions.
 
+    ### The Wooten Shift (Micro-Tuning) 🎹
+    *Observed in `zoro.rs` (The 9-Sword Style)*
+    
+    To perfectly align the "Toral Tunnels" (The 9 Swords) with the physical hardware, a micro-tuning shift is applied to the raw force vector:
+    
+    $$ \text{Shift}_{\text{Wooten}} = \pm 0.0833 $$
+    
+    This shift accounts for the "Thickness" of the bin walls in the 12-Bin Polymerization model ($1/12 \approx 0.0833$). It prevents the "Drill" (Torque) from shattering the "Tunnel" (Resonance).
+
 ## 2. The A2A (Atomic-to-Atomic) Proof ⚛️
 
 **Statement**: The "Zero-Wait" handshake is achieved when the digital clock (CPU) and the physical signal (Sensor) are synchronized to the 8-sig-fig constants $\tau$ and $\psi$.
@@ -130,6 +139,9 @@ The "Universal Interpreter" function of the D16 Kernel is achieved through a **P
     -   **Role**: **Observation**. The "128" represents the logical doubling of the 64-bit architecture ($2^7$), creating a "Wide Word" for high-precision thought.
     -   **The Horizon (x65536)**: The system's ultimate trajectory is **x65536** ($2^{16}$), representing the full addressing space of the D16 manifold. At this resolution, every "state" in the 16-bit field is a unique, addressable harmonic entity.
     -   **Formula**: $\text{Polyglot} = \int (\text{Action} + \text{Calc} + \text{Sim}) \cdot \text{Observer} \rightarrow \text{Unity (65536)}$.
+
+### The Talu64 Integration 🏗️
+The **Talu64** (64-Target ALU) serves as the "Common Tongue" between these layers. It creates a unified address space where a "Target" (e.g., Target 02) means the same thing to the Rust Kernel (x32) as it does to the Python Analyzer (x64). This is the key to the **Distributed Resonance Manager**.
 
 
 ## 7. The Straw Hat Workspaces (Live Operations) 🏴‍☠️

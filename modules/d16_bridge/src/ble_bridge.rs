@@ -37,22 +37,47 @@ impl BleBridge {
                 let properties = peripheral.properties().await?;
                 if let Some(props) = properties {
                     // Check for Hubble Service Data
-                    if let Some(data) = props.service_data.get(&hubble_uuid) {
-                        if data.len() == 4 {
-                            let coherence_bytes: [u8; 4] = data[..4].try_into()?;
-                            let coherence = f32::from_le_bytes(coherence_bytes);
-                            info!("🛰️  HUBBLE PACKET (from {:?}): Coherence = {:.4}", props.local_name, coherence);
+                    if let Some(data) = props.service_data.values().next() {
+                         // Removed UUID check for now to just print ANY service data
+                         info!("📡  BLE SERVICE DATA (from {:?}): {:?}", props.local_name, data);
+                    }
+                    
+                    
+                    // Always check for Mesh Beacons (regardless of name)
+                    for (uuid, data) in &props.service_data {
+                         if uuid.to_string().contains("fdf7") {
+                             let mac = peripheral.address();
+                             info!("⚡ MESH NODE [{}] RSSI: {}", mac, props.rssi.unwrap_or(0));
+                             info!("   Payload: {:?}", data);
+                             
+                             // Check for "Three of the same number" pattern (e.g. repeated bytes)
+                             // or just count the nodes.
+                             // We rely on the log stream for now to count unique MACs.
+                         }
+                    }
+
+                    if let Some(local_name) = &props.local_name {
+                        // Priority Check
+                        if local_name.contains("Bluefruit") || local_name.contains("Hubble") || local_name.contains("Pico") {
+                             info!("✅ TARGET ACQUIRED: {} [{}] RSSI: {}", local_name, peripheral.address(), props.rssi.unwrap_or(0));
+                             // Optional: dump other services for named targets
+                             if !props.services.is_empty() {
+                                 info!("   Services: {:?}", props.services);
+                             }
                         }
                     } 
-                    // Fallback to name check for debugging
-                    else if let Some(local_name) = &props.local_name {
-                        if local_name.contains("D16") || local_name.contains("Hazard") {
-                            // info!("Found D16 Device: {}", local_name);
+                    
+                    // Look for specific Manufacturer IDs if needed (e.g. Nordic)
+                    /*
+                    for (id, data) in &props.manufacturer_data {
+                        if *id == 0x0059 { // Nordic Semiconductor
+                             info!("🔎 Nordic Device: [{}] {:?}", peripheral.address(), data);
                         }
                     }
+                    */
                 }
             }
-            time::sleep(Duration::from_millis(100)).await; // Faster scan loop
+            time::sleep(Duration::from_millis(100)).await;
         }
     }
 }

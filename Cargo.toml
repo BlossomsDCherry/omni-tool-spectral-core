@@ -19,3 +19,8 @@ libc = "0.2.180"
 
 [dev-dependencies]
 # To be added as needed
+
+[[bin]]
+name = "entrainment_relay"
+path = "experiments/entrainment_relay.rs"
+

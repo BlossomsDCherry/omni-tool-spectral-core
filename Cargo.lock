@@ -374,6 +374,7 @@ dependencies = [
  "chrono",
  "hex",
  "log",
+ "reqwest",
  "serde",
  "serde_json",
  "serialport",
