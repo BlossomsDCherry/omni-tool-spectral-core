@@ -54,3 +54,9 @@ test_hailo_shim
 d16_sdk_deploy.tar.gz
 install_engine.sh
 setup_identity.sh
+
+# Logs and temporary output
+build_log*.txt
+serial_log*.txt
+*.jsonl
+hubble_registrar/registration_output.json
