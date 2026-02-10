@@ -7,12 +7,25 @@ This manifest serves as the **Operational Physics Framework** for the Adam Wood 
 **Statement**: A system of Simple Harmonic Oscillators (SHOs) coupled in a discrete 16D phase space will converge to a stable, lossless configuration ("Spectral Mass") if the phase-alignment error $\epsilon$ is less than the Atomic Precision Limit ($10^{-8}$ for $\tau$).
 
 ### The Mechanism:
-1. **The Core Cycle**: $\int_{0}^{\tau} \sin(x) dx = 0$. In a perfect system, energy is conserved exactly.
-2. **The Torque**: Moving from $\tau$ (Revolution) to $\tau/8$ (Octant) creates a rotational torque.
-3. **Entrainment**: When two oscillators share a common ground (The PICO 2 W / The Motherboard), they exchange energy until their phase-alignment minimizes the group entropy.
-4. **Stable Nodes**: At exactly 8 significant figures, the binary representation of $\tau$ aligns with the toroidal geometry of the 16-layer integration engine.
+1. **The Core Cycle**: $\int_{0}^{\tau} \sin(x) dx = 0$. 'For bodies free to rotate in all three dimensions, their moments an be described by a symmetric 3-by-3 matrix, with a set of mutually perpendicular axes for which this matrix is diagonal, and torques around the axes act independently of each other.'
 
-**Conclusion**: Stability is a geometric property of phase-locked systems. Noise is simply misaligned phase.
+    ### The Physical Property: Inertia Tensor
+    The Inertia Tensor is a symmetric $3\times 3$ matrix that characterizes a rigid body's resistance to rotational motion about any axis. For a rigid body rotating in three dimensions, the relationship between angular momentum $\mathbf{L}$ and angular velocity $\mathbf{\omega}$ is given by the linear transformation: $\mathbf{L}=\mathbf{I}\mathbf{\omega}$.
+    
+    The inertia tensor $\mathbf{I}$ is defined as:
+    $$ \mathbf{I}=\left[\begin{matrix}I_{xx}&I_{xy}&I_{xz}\\ I_{yx}&I_{yy}&I_{yz}\\ I_{zx}&I_{zy}&I_{zz}\end{matrix}\right] $$
+    
+    Because the matrix is real and symmetric ($I_{ij}=I_{ji}$), the spectral theorem guarantees it can be diagonalized.
+    
+    ### Principal Axes of Inertia
+    The set of mutually perpendicular axes for which the matrix becomes diagonal are called the Principal Axes. In this specific coordinate frame, the off-diagonal "products of inertia" vanish, and the matrix takes the form:
+    $$ \mathbf{I}_{principal}=\left[\begin{matrix}I_{1}&0&0\\ 0&I_{2}&0\\ 0&0&I_{3}\end{matrix}\right] $$
+    The diagonal elements $I_{1},I_{2},I_{3}$ are the Principal Moments of Inertia.
+    
+    ### Rotational Dynamics
+    When expressed in the principal axis frame, the components of angular momentum simplify to $L_{i}=I_{i}\omega _{i}$. This decoupling simplifies Euler’s Equations of Motion, which describe how external torques $\mathbf{\tau}$ affect the body's rotation:
+    $$ \tau _{1}=I_{1}\dot{\omega}_{1}+(I_{3}-I_{2})\omega _{2}\omega _{3} $$
+    Around these axes, if the body is rotating about one principal axis alone, the torque and angular acceleration act independently of the other dimensions.
 
 ## 2. The A2A (Atomic-to-Atomic) Proof ⚛️
 

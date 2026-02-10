@@ -1,5 +1,4 @@
 use serde::Serialize;
-use std::collections::HashMap;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize)]
 pub enum Stance {

@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "modules/robin_d7_rust",
+    "modules/d16_bridge",
 ]
 
 [package]

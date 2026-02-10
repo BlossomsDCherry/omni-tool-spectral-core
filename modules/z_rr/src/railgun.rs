@@ -87,6 +87,15 @@ extern "C" {
     fn d16_soft_fpga(tau: u64, results: *mut u32);
 }
 
+/// Safe wrapper for the Soft FPGA Kernel
+pub fn run_soft_fpga(tau: u64) -> [u32; 16] {
+    let mut results = [0u32; 16];
+    unsafe {
+        d16_soft_fpga(tau, results.as_mut_ptr());
+    }
+    results
+}
+
 impl ZRailgun {
     pub fn new(seed: u64) -> Self {
         println!(
@@ -334,7 +343,7 @@ impl ZRailgun {
             };
 
             // Calculate active 'bar' height based on Coherence (1.0 to 10.0 scale?)
-            let limit = (coherence * 2.0).clamp(0.0, 11.0) as usize;
+            let _limit = (coherence * 2.0).clamp(0.0, 11.0) as usize;
 
             for i in 0..11 {
                 let pin = 17 + i as u32; // 17..=27

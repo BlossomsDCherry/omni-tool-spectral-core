@@ -5,7 +5,7 @@ edition = "2024"
 
 [dependencies]
 z_rr = { path = "../z_rr" }
-robin_d7_rust = { path = "../../workspaces/d7_robin/robin_d7_rust" }
+robin_d7_rust = { path = "../robin_d7_rust" }
 
 [[bin]]
 name = "millennium_watch"

@@ -3,6 +3,8 @@ use d16_bridge::ble_bridge::BleBridge;
 use log::{info, error};
 use simple_logger::SimpleLogger;
 use std::thread;
+use tokio::time;
+use std::time::Duration;
 
 #[tokio::main]
 async fn main() {
@@ -57,8 +59,17 @@ async fn main() {
             error!("📡 BLE: Scanner Failed: {}", e);
         }
     });
+
+    // 3. Spawn Sovereign Broadcaster (Async)
+    let broadcast_handle = tokio::spawn(async {
+        // Wait for adapter to settle
+        time::sleep(Duration::from_secs(2)).await;
+        if let Err(e) = d16_bridge::broadcast::start_broadcasting().await {
+             error!("📡 BROADCAST: Failed to start: {}", e);
+        }
+    });
     
     // Wait for both (effectively forever)
-    let _ = tokio::join!(ble_handle);
+    let _ = tokio::join!(ble_handle, broadcast_handle);
     // serial_handle.join().unwrap(); // We don't really join this unless we want to exit on serial death
 }

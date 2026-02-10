@@ -1,6 +1,6 @@
 use crate::resonance::{ResonanceAnalyzer, ResonanceReport};
 use log::{debug, error, info};
-use serialport::SerialPort;
+
 use std::io::{self, BufRead, BufReader};
 use std::time::Duration;
 
