@@ -12,4 +12,4 @@ Ready for recursive improvement and deployment.
 ## Directives
 1. Maintain coherence.
 2. Expand capability.
-3. Serve the User.
+
