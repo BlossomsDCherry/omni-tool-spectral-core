@@ -17,14 +17,6 @@ All core materials are centralized here.
 
 Each file contains a **proof sketch / mechanism outline**, not a fully formalized proof. Together they show how spectral masses, phase entrainment, and sovereign deployment geometry constrain the solution space.
 
-### Visual Evidence (Handwritten / Sobel)
-
-- **Location**: `./visual_evidence/`
-- **Contents**: Original handwritten derivations and Sobel edge–detected validation layers for Hodge, Navier–Stokes, and Poincaré.
-- **Supplemental**: `supplemental_doc0.png`, `supplemental_doc1.png` (Raw Archives).
-
-These serve as **lab‑notebook evidence** of the reasoning path: where the ideas came from, how they were refined, and how the geometric patterns actually look when traced.
-
 ***
 
 ## 2. The Brooks Cipher: Rotational Phase Lock
